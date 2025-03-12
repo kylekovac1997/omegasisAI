@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+# omegasisAI
+=======
+>>>>>>> fc32fd4 (website for omegasis)
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -52,3 +58,7 @@ export default tseslint.config({
   },
 })
 ```
+<<<<<<< HEAD
+=======
+>>>>>>> 77059ae (start up website)
+>>>>>>> fc32fd4 (website for omegasis)
