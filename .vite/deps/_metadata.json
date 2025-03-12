@@ -1,32 +1,38 @@
 {
-  "hash": "072ca2c7",
+  "hash": "5780863b",
   "configHash": "00f3e31a",
-  "lockfileHash": "c7236c92",
-  "browserHash": "64bfddc5",
+  "lockfileHash": "4346b2b0",
+  "browserHash": "6c079268",
   "optimized": {
     "react/jsx-dev-runtime": {
       "src": "../../node_modules/react/jsx-dev-runtime.js",
       "file": "react_jsx-dev-runtime.js",
-      "fileHash": "61ac5f83",
+      "fileHash": "91fb089b",
       "needsInterop": true
     },
     "react-router-dom": {
       "src": "../../node_modules/react-router-dom/dist/index.mjs",
       "file": "react-router-dom.js",
-      "fileHash": "944fedbb",
+      "fileHash": "bfceedaa",
       "needsInterop": false
     },
     "react": {
       "src": "../../node_modules/react/index.js",
       "file": "react.js",
-      "fileHash": "fbfda1df",
+      "fileHash": "35d3a410",
       "needsInterop": true
     },
     "react-dom/client": {
       "src": "../../node_modules/react-dom/client.js",
       "file": "react-dom_client.js",
-      "fileHash": "a86bf398",
+      "fileHash": "fddb5172",
       "needsInterop": true
+    },
+    "styled-components": {
+      "src": "../../node_modules/styled-components/dist/styled-components.browser.esm.js",
+      "file": "styled-components.js",
+      "fileHash": "bf7f42ee",
+      "needsInterop": false
     }
   },
   "chunks": {

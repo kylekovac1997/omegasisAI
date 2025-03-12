@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Section from '../styles/Section_Styled';
 const Main_Page: React.FC = () => {
   return (
     <div className="bg-gray-900 text-white min-h-screen">
@@ -36,7 +36,7 @@ const Main_Page: React.FC = () => {
       </section>
       
       {/* Pricing Section */}
-      <section id="pricing" className="py-20 text-center">
+      <Section id="pricing" color='white' style={{ boxShadow: '0 0 50px pink' }}>
         <h2 className="text-4xl font-semibold">Pricing Plans</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 container mx-auto px-4">
           {["Basic", "Pro", "Enterprise"].map(plan => (
@@ -47,10 +47,10 @@ const Main_Page: React.FC = () => {
             </div>
           ))}
         </div>
-      </section>
+      </Section>
       
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-gray-800 text-center">
+      <Section id="contact" color='white' style={{ boxShadow: '0 0 10px white' }}>
         <h2 className="text-4xl font-semibold">Contact Us</h2>
         <form className="max-w-lg mx-auto bg-white bg-opacity-10 backdrop-blur-md p-8 rounded-xl mt-6">
           <input type="text" placeholder="Your Name" className="w-full p-3 bg-transparent border border-white mb-4 placeholder-white" />
@@ -58,7 +58,7 @@ const Main_Page: React.FC = () => {
           <textarea placeholder="Your Message" className="w-full p-3 bg-transparent border border-white mb-4 placeholder-white h-32"></textarea>
           <button className="w-full bg-blue-500 px-6 py-3 rounded-full hover:bg-blue-600">Send Message</button>
         </form>
-      </section>
+      </Section>
       
       {/* Footer */}
       <footer className="bg-black bg-opacity-50 backdrop-blur-md text-center p-4">
