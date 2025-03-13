@@ -5,7 +5,6 @@ function App() {
 
   return (
     <>
-    <p>Apps</p>
     <Routes>  
       <Route path='/' element={<Main_Page/>}/>
 

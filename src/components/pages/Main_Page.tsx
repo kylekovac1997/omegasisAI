@@ -1,20 +1,21 @@
 import React from 'react';
 import Section from '../styles/Section_Styled';
+import { Header_Styled } from '../styles/Header_Styled';
 const Main_Page: React.FC = () => {
   return (
     <div className="bg-gray-900 text-white min-h-screen">
       {/* Navbar */}
-      <header className="bg-black bg-opacity-50 backdrop-blur-md p-4 fixed w-full top-0 z-10">
-        <nav className="container mx-auto flex justify-between items-center">
-          <h1 className="text-2xl font-bold">Omgeasis AI</h1>
-          <div>
-            <a href="#services" className="mx-3">Services</a>
-            <a href="#pricing" className="mx-3">Pricing</a>
-            <a href="#contact" className="mx-3">Contact</a>
-          </div>
-        </nav>
-      </header>
+    <Header_Styled.Header className="bg-black bg-opacity-50 backdrop-blur-md p-4 fixed w-full top-0 z-10">
+     
+       <Header_Styled.Logo>OMEGASIS AI</Header_Styled.Logo>
+       <Header_Styled.NavBar>
+        <Header_Styled.NavItem href="/">Home</Header_Styled.NavItem>
+        <Header_Styled.NavItem href="#home">About Us</Header_Styled.NavItem>
+        <Header_Styled.NavItem href="#home">Contact</Header_Styled.NavItem>
+       </Header_Styled.NavBar>
       
+    </Header_Styled.Header>
+
       {/* Hero Section */}
       <section className="h-screen flex flex-col justify-center items-center text-center px-4">
         <h1 className="text-5xl font-bold">Welcome to Omgeasis AI</h1>

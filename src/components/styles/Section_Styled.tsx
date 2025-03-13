@@ -34,7 +34,7 @@ const Section_Style = styled.section`
     animation: ${glow} 2s infinite ease-in-out, ${scrollToView} 1s ease-out;
     padding: 20px;
     margin: 20px 0;
-    background-color: #282c34;
+    background-color: #1d294074;
     color: white;
     border-radius: 10px;
 `;
