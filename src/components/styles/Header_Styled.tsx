@@ -14,10 +14,8 @@ const Logo = styled.h1`
     height: 50px;
     font-size: 29px;
     font-family: 'Orbitron', sans-serif;
-    color: #00AEEF; /* Strong solid blue */
-  
-
-
+    color: rgb(193, 221, 232); /* Strong solid blue */
+    text-shadow: 0 0 5px rgba(163, 196, 208, 0.75), 0 0 10px rgba(0, 174, 239, 0.75), 0 0 15px rgba(0, 174, 239, 0.75);
 `;
 
 const NavBar = styled.nav`
@@ -27,10 +25,12 @@ const NavBar = styled.nav`
 
 const NavItem = styled.a`
     text-decoration: none;
-    color: #333;
+    color: rgb(193, 221, 232); /* Strong solid blue */
     font-weight: bold;
     &:hover {
-        color: #007bff;
+        color: #78afeb;
+        text-shadow: 0 0 2px rgba(163, 196, 208, 0.75), 0 0 1px rgba(0, 174, 239, 0.75), 0 0 15px rgba(0, 174, 239, 0.75);
+
     }
 `;
 
