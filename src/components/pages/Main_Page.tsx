@@ -6,7 +6,7 @@ import OmegasisLogo from '/home/kylek/Website/omegasisAI/src/components/images/i
 const Main_Page: React.FC = () => {
   return (
    
-    <div className="bg-gray-900 text-white min-h-screen">
+    <div >
       {/* Navbar */}
       <NavBar />
       <ImageWrapper> <CenteredImage src={OmegasisLogo}/></ImageWrapper>
