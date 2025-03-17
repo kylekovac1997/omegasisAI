@@ -9,7 +9,8 @@ const Header = styled.header`
    
 `;
 
-const Logo = styled.h1`
+const Logo = styled.a`
+font-weight: 450;
     float: left;
     height: 50px;
     font-size: 29px;
@@ -27,10 +28,13 @@ const NavItem = styled.a`
     text-decoration: none;
     color: rgb(193, 221, 232); /* Strong solid blue */
     font-weight: bold;
+    border: 2px solid #78afeb;
+    border-radius: 50px;
+    padding: 5px 10px;
     &:hover {
         color: #78afeb;
         text-shadow: 0 0 2px rgba(163, 196, 208, 0.75), 0 0 1px rgba(0, 174, 239, 0.75), 0 0 15px rgba(0, 174, 239, 0.75);
-
+        
     }
 `;
 
@@ -38,5 +42,5 @@ export const Header_Styled = {
     Header,
     Logo,
     NavBar,
-    NavItem
+    NavItem, 
 };
