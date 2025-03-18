@@ -4,8 +4,8 @@ export const ImageWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 500px; /* Adjust as needed */
-    height: 360px; /* Keep it slightly larger than the image */
+    max-width: 500px; /* Adjust as needed */
+    max-height: 360px; /* Keep it slightly larger than the image */
     
     border-radius: 50%;
 
@@ -33,8 +33,8 @@ export const ImageWrapper = styled.div`
 `;
 
 export const CenteredImage = styled.img`
-    width: 430px;
-    height: 350px;
+    max-width: 430px;
+    max-height: 350px;
     
    
 

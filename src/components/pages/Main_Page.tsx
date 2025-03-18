@@ -11,7 +11,7 @@ const Main_Page: React.FC = () => {
       <NavBar />
       <ImageWrapper> <CenteredImage src={OmegasisLogo}/></ImageWrapper>
      
-      {/* Hero Section */}
+      Hero Section
       <section className="h-screen flex flex-col justify-center items-center text-center px-4">
         <h1 className="text-5xl font-bold">Welcome to Omgeasis AI</h1>
         <p className="text-lg mt-4 max-w-2xl">Next-gen AI chatbot solutions for businesses looking to automate and optimize communication.</p>

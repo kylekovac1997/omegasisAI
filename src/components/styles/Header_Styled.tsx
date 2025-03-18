@@ -6,7 +6,7 @@ const Header = styled.header`
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-   border: 1px solid #78afeb;
+
    max-width: 1280px;
    width: 100%;
 `;
@@ -24,6 +24,10 @@ font-weight: 450;
 const NavBar = styled.nav`
     display: flex;
     gap: 20px;
+
+    @media (max-width: 768px) {
+        display: none;
+    }
 `;
 
 const NavItem = styled.a`
