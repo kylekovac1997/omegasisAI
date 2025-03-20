@@ -1,10 +1,20 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/omegasisAI/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="./vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
+    <title>Omegasis AI</title>
+    <script>
+      // GitHub Pages Fix: Redirects to index.html for React Router (BrowserRouter)
+      (function() {
+        var redirectPath = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirectPath && redirectPath !== location.pathname) {
+          history.replaceState(null, null, redirectPath);
+        }
+      })();
+    </script>
     <script type="module" crossorigin src="/omegasisAI/assets/index-D7L_Q8dj.js"></script>
     <link rel="stylesheet" crossorigin href="/omegasisAI/assets/index-DXmvef2b.css">
   </head>
