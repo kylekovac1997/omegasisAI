@@ -5,11 +5,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;  max-width: 1280px;
+  min-height: 100vh;
+  max-width: 1280px;
   width: 100%;
   margin: 0 auto;
+  padding: 10px;
   
-
 }
 
 body {
@@ -30,4 +31,9 @@ body {
   padding: 20px;
   background-color: transparent;
   
+}
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
 }

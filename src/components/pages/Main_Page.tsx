@@ -1,35 +1,35 @@
 import React from 'react';
 import Section from '../styles/Section_Styled';
 import NavBar from '../nav_bar/Nav_bar';
-import { CenteredImage, ImageWrapper } from '../styles/Logo_styled';
-import OmegasisLogo from '/home/kylek/Website/omegasisAI/src/components/images/images/omegasislogo.png';
+import {  Logo } from '../styles/Logo_styled';
+
+import { MainIntroSection, ServicesSection } from '../styles/Main_Intro_Styled';
 const Main_Page: React.FC = () => {
   return (
    
     <div >
       {/* Navbar */}
       <NavBar />
-      <ImageWrapper> <CenteredImage src={OmegasisLogo}/></ImageWrapper>
+      <Logo />
      
-      Hero Section
-      <section className="h-screen flex flex-col justify-center items-center text-center px-4">
-        <h1 className="text-5xl font-bold">Welcome to Omgeasis AI</h1>
-        <p className="text-lg mt-4 max-w-2xl">Next-gen AI chatbot solutions for businesses looking to automate and optimize communication.</p>
-        <button className="mt-6 px-6 py-3 bg-blue-500 rounded-full hover:bg-blue-600">Get Started</button>
-      </section>
+      <MainIntroSection>
+        <h1>Welcome to Omgeasis AI</h1>
+        <p>Next-gen AI chatbot solutions for businesses looking to automate and optimize communication.</p>
+        <button>Get Started</button>
+      </MainIntroSection>
       
       {/* Services Section */}
-      <section id="services" className="py-20 bg-gray-800 text-center">
-        <h2 className="text-4xl font-semibold">Our Services</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 container mx-auto px-4">
+      <ServicesSection id="services">
+        <h2>Our Services</h2>
+        <div className="services-grid">
           {["AI Chatbots", "AI Receptionist", "Email Automation"].map(service => (
-            <div key={service} className="p-6 bg-white bg-opacity-10 backdrop-blur-md rounded-xl">
-              <h3 className="text-2xl font-bold">{service}</h3>
-              <p className="mt-2">Automate your business with intelligent AI solutions.</p>
+            <div key={service} className="service-card">
+              <h3>{service}</h3>
+              <p>Automate your business with intelligent AI solutions.</p>
             </div>
           ))}
         </div>
-      </section>
+      </ServicesSection>
       
       {/* Pricing Section */}
       <Section id="pricing" color='white' style={{ boxShadow: '0 0 50px pink' }}>

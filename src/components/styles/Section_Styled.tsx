@@ -37,6 +37,8 @@ const Section_Style = styled.section`
     background-color: #1d294074;
     color: white;
     border-radius: 10px;
+    max-width: 600px;
+    width: 100%;
 `;
 interface SectionProps {
     id: string;
