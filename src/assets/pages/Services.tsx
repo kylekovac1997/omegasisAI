@@ -286,11 +286,11 @@ const Services: React.FC = () => {
         trigger: '.advantages-grid',
         start: 'top 80%',
       },
-      y: 30,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.1,
-      ease: 'power3.out',
+    //   y: 30,
+    //   opacity: 0,
+    //   duration: 0.8,
+    //   stagger: 0.1,
+    //   ease: 'power3.out',
     });
     
     gsap.from('.cta-element', {
@@ -345,7 +345,7 @@ const Services: React.FC = () => {
               description="Automatically qualify leads through intelligent conversations and seamlessly sync data into your existing CRM. This service filters out unqualified leads and sends only high-quality prospects to your sales team."
               icon={<LeadQualificationIcon />}
               path={`/services/${SERVICE_IDS.LEAD_QUALIFICATION}`}
-            //   variant="gradient"
+            variant="dark"
               className="service-card-top"
             />
             
@@ -363,6 +363,7 @@ const Services: React.FC = () => {
               icon={<MultilingualIcon />}
               path={`/services/${SERVICE_IDS.MULTILINGUAL}`}
               className="service-card"
+              variant="dark"
             />
             
             <ServiceCard 
@@ -370,7 +371,7 @@ const Services: React.FC = () => {
               description="Tailor-made chatbot solutions built to meet the specific needs of your business. Whether it's booking systems, support workflows, or industry-specific features, we design your AI from the ground up."
               icon={<CustomDevIcon />}
               path={`/services/${SERVICE_IDS.CUSTOM}`}
-              variant="dark"
+              
               className="service-card"
             />
             
@@ -380,6 +381,7 @@ const Services: React.FC = () => {
               icon={<SocialMediaIcon />}
               path={`/services/${SERVICE_IDS.SOCIAL_MEDIA}`}
               className="service-card"
+              variant="dark"
             />
           </ServicesGrid>
         </ServicesContainer>

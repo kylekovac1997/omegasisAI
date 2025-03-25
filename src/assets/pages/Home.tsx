@@ -15,6 +15,7 @@ const Home: React.FC = () => {
         <title>OMEGASIS AI | AI-Powered Chatbots & Automation Solutions</title>
         <meta name="description" content="OMEGASIS AI delivers cutting-edge AI chatbots and automation solutions that enhance customer experiences, streamline operations, and drive revenue growth." />
         <meta name="keywords" content="AI chatbots, automation, customer engagement, artificial intelligence, AI solutions, lead qualification, multilingual chatbots" />
+      
       </Helmet>
       
       <Hero />

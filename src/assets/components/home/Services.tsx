@@ -142,6 +142,18 @@ const Services: React.FC = () => {
         stagger: 0.15,
         ease: 'power3.out',
       });
+
+      gsap.from('.service-card-top', {
+        scrollTrigger: {
+          trigger: '.services-grid',
+          start: 'top 80%',
+        },
+        // y: 50,
+        // opacity: 0,
+        // duration: 0.8,
+        // stagger: 0.15,
+        ease: 'power3.out',
+      });
       
       // View all button animation
       gsap.from('.view-all', {
@@ -177,7 +189,8 @@ const Services: React.FC = () => {
             icon={<SmsEmailIcon />}
             path={`/services/${SERVICE_IDS.SMS_EMAIL}`}
             animationDelay={0}
-            className="service-card"
+            className="service-card-top"
+               variant="gradient"
           />
           
           <ServiceCard 
@@ -185,9 +198,9 @@ const Services: React.FC = () => {
             description="Qualify leads instantly and integrate with your CRM for seamless lead management and conversion tracking."
             icon={<LeadQualificationIcon />}
             path={`/services/${SERVICE_IDS.LEAD_QUALIFICATION}`}
-            variant="gradient"
+            variant="dark"
             animationDelay={0.1}
-            className="service-card"
+            className="service-card-top"
           />
           
           <ServiceCard 
@@ -196,7 +209,8 @@ const Services: React.FC = () => {
             icon={<EcommerceIcon />}
             path={`/services/${SERVICE_IDS.ECOMMERCE}`}
             animationDelay={0.2}
-            className="service-card"
+            className="service-card-top"
+               variant="gradient"
           />
           
           <ServiceCard 
@@ -205,6 +219,7 @@ const Services: React.FC = () => {
             icon={<MultilingualIcon />}
             path={`/services/${SERVICE_IDS.MULTILINGUAL}`}
             animationDelay={0.3}
+            variant="dark"
             className="service-card"
           />
           
@@ -213,9 +228,9 @@ const Services: React.FC = () => {
             description="Build tailored AI solutions that align perfectly with your brand voice, business workflows, and specific industry needs."
             icon={<CustomDevIcon />}
             path={`/services/${SERVICE_IDS.CUSTOM}`}
-            variant="dark"
             animationDelay={0.4}
             className="service-card"
+             variant="gradient"
           />
           
           <ServiceCard 
@@ -224,6 +239,7 @@ const Services: React.FC = () => {
             icon={<SocialMediaIcon />}
             path={`/services/${SERVICE_IDS.SOCIAL_MEDIA}`}
             animationDelay={0.5}
+            variant="dark"
             className="service-card"
           />
         </ServicesGrid>

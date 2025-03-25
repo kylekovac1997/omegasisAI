@@ -437,13 +437,13 @@ const About: React.FC = () => {
       gsap.from('.mission-card', {
         scrollTrigger: {
           trigger: '.mission-section',
-          start: 'top 80%',
+          start: 'top 50%',
         },
         y: 50,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: 'power3.out',
+        opacity: 0.5,
+        // duration: 0.8,
+        // stagger: 0.8,
+        // ease: 'power3.out',
       })
     );
     
@@ -469,11 +469,11 @@ const About: React.FC = () => {
           trigger: '.values-section',
           start: 'top 80%',
         },
-        y: 30,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: 'power3.out',
+        // y: 30,
+        // opacity: 0,
+        // duration: 0.8,
+        // stagger: 0.1,
+        // ease: 'power3.out',
       })
     );
     

@@ -31,6 +31,7 @@ const getButtonStyles = ($variant: ButtonVariant) => {
 
         &:hover:not(:disabled) {
           background-color: ${theme.colors.secondary};
+          color: ${theme.colors.white};
           transform: translateY(-2px);
           box-shadow: ${theme.shadows.md};
         }
@@ -50,8 +51,8 @@ const getButtonStyles = ($variant: ButtonVariant) => {
     case 'outline':
       return css`
         background-color: transparent;
-        color: ${theme.colors.primary};
-        border: 2px solid ${theme.colors.primary};
+        color: ${theme.colors.white};
+        border: 2px solid ${theme.colors.white};
 
         &:hover:not(:disabled) {
           background-color: ${theme.colors.primary};

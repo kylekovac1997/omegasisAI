@@ -39,6 +39,12 @@ const CardContainer = styled.div<{ $variant: string }>`
           box-shadow: ${theme.shadows.lg};
         `;
       case 'light':
+        return `
+          background-color: ${theme.colors.white};
+          color: ${theme.colors.dark};
+          border: 1px solid ${theme.colors.lightGray};
+          box-shadow: ${theme.shadows.md};
+        `;
       default:
         return `
           background-color: ${theme.colors.white};

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { gsap } from 'gsap';
 import { theme } from '../../styles/theme';
 import Button from '../../components/common/Button';
+import AnimatedBg from '../common/AnimatedBg';
 
 const HeroSection = styled.section`
   position: relative;
@@ -300,7 +301,9 @@ const Hero: React.FC = () => {
   return (
     <HeroSection>
       <HeroContainer>
+        <AnimatedBg />
         <HeroContent>
+            
           <HeroTitle ref={titleRef}>
             Transforming Business Communication with <span className="gradient-text">AI-Powered Chatbots</span>
           </HeroTitle>

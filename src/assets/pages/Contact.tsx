@@ -157,6 +157,7 @@ const SocialTitle = styled.h3`
 const SocialLinks = styled.div`
   display: flex;
   gap: ${theme.spacing.md};
+ 
 `;
 
 const SocialLink = styled.a`
@@ -234,10 +235,11 @@ const Contact: React.FC = () => {
           start: 'top 90%',
         },
         y: 20,
-        opacity: 0,
+        opacity: 0.5,
         stagger: 0.1,
         duration: 0.6,
         ease: 'power3.out',
+        
       });
     }
   }, []);
@@ -273,7 +275,7 @@ const Contact: React.FC = () => {
                 <ContactInfoContent>
                   <ContactInfoLabel>Phone</ContactInfoLabel>
                   <ContactInfoText>
-                    <a href="tel:+1-800-123-4567">+1 (800) 123-4567</a>
+                    <a href="tel:+1-800-123-4567">+61 422341522</a>
                   </ContactInfoText>
                 </ContactInfoContent>
               </ContactInfoItem>
@@ -303,9 +305,9 @@ const Contact: React.FC = () => {
                 <ContactInfoContent>
                   <ContactInfoLabel>Office</ContactInfoLabel>
                   <ContactInfoText>
-                    123 Innovation Drive<br />
-                    Suite 500<br />
-                    San Francisco, CA 94103
+                  Proudly Australian-owned<br />
+                    {/* Suite 500<br /> */}
+                    , based in Melbourne   
                   </ContactInfoText>
                 </ContactInfoContent>
               </ContactInfoItem>
@@ -321,8 +323,8 @@ const Contact: React.FC = () => {
                 <ContactInfoContent>
                   <ContactInfoLabel>Support Hours</ContactInfoLabel>
                   <ContactInfoText>
-                    Monday - Friday<br />
-                    9:00 AM - 6:00 PM EST
+                    Monday - Sunday<br />
+                    6:00 AM - 10:00 PM EST
                   </ContactInfoText>
                 </ContactInfoContent>
               </ContactInfoItem>
@@ -343,7 +345,7 @@ const Contact: React.FC = () => {
                   </SocialLink>
                   <SocialLink 
                     href="https://facebook.com" 
-                    target="_blank" 
+                    target="facebook" 
                     rel="noopener noreferrer"
                     aria-label="Facebook"
                     className="social-animation"

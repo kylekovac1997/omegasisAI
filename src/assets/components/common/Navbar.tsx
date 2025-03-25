@@ -67,7 +67,7 @@ const NavLinks = styled.nav`
 `;
 
 const NavLink = styled(Link)<{ $isActive: boolean }>`
-  color: ${({ $isActive }) => ($isActive ? theme.colors.primary : theme.colors.dark)};
+  color: ${({ $isActive }) => ($isActive ? theme.colors.primary : theme.colors.gray)};
   text-decoration: none;
   font-weight: ${({ $isActive }) =>
     $isActive ? theme.typography.fontWeight.semibold : theme.typography.fontWeight.medium};
@@ -263,7 +263,7 @@ const Navbar: React.FC = () => {
       <NavbarContainer $isScrolled={isScrolled} ref={navbarRef}>
         <NavbarInner>
           <Logo to="/">
-            <span className="gradient">OMEGASIS</span> <span>AI</span>
+            <span className="gradient">OMEGASIS</span> <span className="gradient">-AI</span>
           </Logo>
 
           <NavLinks>

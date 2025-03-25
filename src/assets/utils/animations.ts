@@ -383,7 +383,7 @@ export const initAnimations = () => {
   // ScrollTrigger defaults
   ScrollTrigger.defaults({
     toggleActions: 'play none none none',
-    markers: process.env.NODE_ENV === 'development',
+    // markers: process.env.NODE_ENV === 'development',
   });
   
   // Match media queries for responsive animations
