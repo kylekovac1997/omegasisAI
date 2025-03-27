@@ -1,5 +1,4 @@
-
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createHashRouter, RouterProvider } from 'react-router-dom';
 import Layout from './assets/components/common/Layout';
 
 // Pages
@@ -18,7 +17,7 @@ const ErrorPage = () => (
 );
 
 // Define routes
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: '/',
     element: (
