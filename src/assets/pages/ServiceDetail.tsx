@@ -9,8 +9,8 @@ import LeadQualification from '../components/services/LeadQualification';
 import SMSEmailAutomation from '../components/services/SMSEmailAutomation';
 // TODO: Import other service components as they are created
 import EcommerceIntegration from '../components/services/EcommerceAssistant';
-// import MultilingualChatbots from '@/components/services/MultilingualChatbots';
-// import CustomDevelopment from '@/components/services/CustomDevelopment';
+import MultilingualChatbots from '../components/services/MultilingualChatbots';
+import CustomDevelopment from '../components/services/CustomDevelopment';
 // import SocialMediaAutomation from '@/components/services/SocialMediaAutomation';
 
 interface ServiceDetailParams {
@@ -58,13 +58,11 @@ const ServiceDetail: React.FC = () => {
       case SERVICE_IDS.LEAD_QUALIFICATION:
         return <LeadQualification />;
       case SERVICE_IDS.ECOMMERCE:
-        // return <EcommerceAssistant />;
         return <EcommerceIntegration />;
       case SERVICE_IDS.MULTILINGUAL:
-        // return <MultilingualChatbots />;
-        return <div>Multilingual Chatbots - Coming Soon</div>;
+        return <MultilingualChatbots />;
       case SERVICE_IDS.CUSTOM:
-        // return <CustomDevelopment />;
+        return <CustomDevelopment />;
         return <div>Custom Development - Coming Soon</div>;
       case SERVICE_IDS.SOCIAL_MEDIA:
         // return <SocialMediaAutomation />;

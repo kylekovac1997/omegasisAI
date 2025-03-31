@@ -126,7 +126,7 @@ const MobileMenuToggle = styled.button<{ $isOpen: boolean }>`
     display: block;
     width: 100%;
     height: 2px;
-    background-color: ${theme.colors.dark};
+    background-color: ${theme.colors.tertiary};
     border-radius: ${theme.borderRadius.full};
     transition: ${theme.transitions.default};
 
