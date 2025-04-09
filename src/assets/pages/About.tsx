@@ -5,32 +5,95 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Helmet } from 'react-helmet-async';
 import { theme } from '../styles/theme';
 import Button from '../components/common/Button';
-// import AnimatedSection from '@/components/common/AnimatedSection';
+import { 
+  Pen, 
+  Users, 
+  Bell, 
+  Check, 
+  Star, 
+  Eye, 
+  Clipboard, 
+  ArrowRight, 
+  UserPlus
+} from 'lucide-react';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
 const AboutPageWrapper = styled.div`
-  padding-top: 100px;
   background-color: ${theme.colors.white};
+  overflow: hidden;
+  padding-top: 0;
+  
+  @media (max-width: ${theme.breakpoints.md}) {
+    padding-top: 0;
+  }
 `;
 
 const AboutHero = styled.section`
-  padding: ${theme.spacing['4xl']} 0;
-  background: ${theme.colors.gradient.primary};
-  color: ${theme.colors.white};
   position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, ${theme.colors.primary} 0%, #4a80ff 100%);
+  color: ${theme.colors.white};
   overflow: hidden;
+  padding: ${theme.spacing['4xl']} 0;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'%3E%3Ccircle cx='20' cy='20' r='5'/%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.6;
+    z-index: 0;
+  }
   
   &::after {
     content: '';
     position: absolute;
-    top: 0;
+    bottom: -2px;
     left: 0;
     width: 100%;
-    height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'%3E%3Ccircle cx='20' cy='20' r='5'/%3E%3C/g%3E%3C/svg%3E");
-    z-index: 0;
+    height: 150px;
+    background: linear-gradient(to top, ${theme.colors.white}, transparent);
+    z-index: 1;
+  }
+  
+  @media (max-width: ${theme.breakpoints.md}) {
+    min-height: 60vh;
+  }
+`;
+
+const HeroContent = styled.div`
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  text-align: center;
+  padding: 0 ${theme.spacing.lg};
+`;
+
+const HeroDecoration = styled.div`
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+  top: -250px;
+  right: -250px;
+  z-index: 0;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+    bottom: -150px;
+    left: -150px;
   }
 `;
 
@@ -39,7 +102,6 @@ const AboutContainer = styled.div`
   margin: 0 auto;
   padding: 0 ${theme.spacing.lg};
   position: relative;
-  z-index: 1;
   
   @media (max-width: ${theme.breakpoints.md}) {
     padding: 0 ${theme.spacing.md};
@@ -47,152 +109,229 @@ const AboutContainer = styled.div`
 `;
 
 const AboutTitle = styled.h1`
-  font-size: clamp(2.5rem, 5vw, ${theme.typography.fontSize['4xl']});
+  font-size: clamp(2.5rem, 7vw, 5rem);
   font-weight: ${theme.typography.fontWeight.bold};
-  margin-bottom: ${theme.spacing.md};
-  text-align: center;
+  margin-bottom: ${theme.spacing.lg};
+  background: linear-gradient(to right, #ffffff, #e0e0ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  line-height: 1.1;
 `;
 
 const AboutSubtitle = styled.p`
-  font-size: ${theme.typography.fontSize.lg};
+  font-size: clamp(${theme.typography.fontSize.lg}, 2.5vw, ${theme.typography.fontSize.xl});
   line-height: 1.6;
   max-width: 800px;
   margin: 0 auto;
-  text-align: center;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 `;
 
-const StorySection = styled.section`
-  padding: ${theme.spacing['4xl']} 0;
-`;
-
-const StoryGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: ${theme.spacing['3xl']};
-  align-items: center;
+const Section = styled.section`
+  padding: ${theme.spacing['5xl']} 0;
+  position: relative;
+  display: block;
+  width: 100%;
+  overflow: visible;
+  min-height: 200px;
   
-  @media (max-width: ${theme.breakpoints.lg}) {
-    grid-template-columns: 1fr;
+  &:nth-child(even) {
+    background-color: ${theme.colors.lightGray || '#f5f5f5'};
+  }
+  
+  @media (max-width: ${theme.breakpoints.md}) {
+    padding: ${theme.spacing['4xl']} 0;
+  }
+  
+  @media (max-width: ${theme.breakpoints.sm}) {
+    padding: ${theme.spacing['3xl']} 0;
   }
 `;
 
-const StoryContent = styled.div`
-  @media (max-width: ${theme.breakpoints.lg}) {
-    order: 2;
-  }
-`;
-
-const StoryTitle = styled.h2`
-  font-size: ${theme.typography.fontSize['3xl']};
+const SectionTitle = styled.h2`
+  font-size: clamp(${theme.typography.fontSize['2xl']}, 4vw, ${theme.typography.fontSize['4xl']});
   font-weight: ${theme.typography.fontWeight.bold};
-  margin-bottom: ${theme.spacing.md};
+  margin-bottom: ${theme.spacing['2xl']};
   color: ${theme.colors.dark};
+  text-align: center;
+  position: relative;
   
   .highlight {
     color: ${theme.colors.primary};
+    position: relative;
+    display: inline-block;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: ${theme.colors.primary};
+      border-radius: 3px;
+    }
   }
+`;
+
+const StoryContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${theme.spacing['2xl']};
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
 `;
 
 const StoryText = styled.div`
-  margin-bottom: ${theme.spacing.xl};
+  position: relative;
+  width: 100%;
   
   p {
-    margin-bottom: ${theme.spacing.md};
-    font-size: ${theme.typography.fontSize.md};
-    line-height: 1.7;
+    margin-bottom: ${theme.spacing.lg};
+    font-size: ${theme.typography.fontSize.lg};
+    line-height: 1.8;
     color: ${theme.colors.dark};
+  }
+  
+  &::before {
+    content: "\u201C"; /* Unicode for left double quotation mark */
+    position: absolute;
+    top: -40px;
+    left: -20px;
+    font-size: 120px;
+    color: rgba(0, 0, 0, 0.05);
+    font-family: serif;
+    z-index: 0;
+  }
+  
+  @media (max-width: ${theme.breakpoints.md}) {
+    &::before {
+      top: -30px;
+      left: -10px;
+      font-size: 80px;
+    }
   }
 `;
 
-const StoryImage = styled.div`
+const ButtonWrapper = styled.div`
+  margin-top: ${theme.spacing.xl};
+  text-align: center;
+`;
+
+const MissionWrapper = styled.div`
+  padding: ${theme.spacing['4xl']} ${theme.spacing.xl};
+  background-color: #f8f9fc;
+  border-radius: ${theme.borderRadius.xl || '15px'};
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   position: relative;
-  
-  @media (max-width: ${theme.breakpoints.lg}) {
-    order: 1;
-    margin-bottom: ${theme.spacing.xl};
-  }
-  
-  img {
-    width: 100%;
-    border-radius: ${theme.borderRadius.xl};
-    box-shadow: ${theme.shadows.lg};
-  }
+  overflow: visible;
+  width: 100%;
+  display: block;
+  min-height: 300px;
+  margin-bottom: 20px;
   
   &::before {
     content: '';
     position: absolute;
-    top: -20px;
-    left: -20px;
-    width: 100px;
-    height: 100px;
-    background: ${theme.colors.gradient.primary};
-    border-radius: ${theme.borderRadius.lg};
-    z-index: -1;
-    transform: rotate(-15deg);
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(66, 99, 235, 0.1) 0%, rgba(66, 99, 235, 0) 70%);
+    top: -150px;
+    right: -150px;
+    z-index: 0;
+    pointer-events: none;
   }
   
   &::after {
     content: '';
     position: absolute;
-    bottom: -20px;
-    right: -20px;
-    width: 150px;
-    height: 150px;
-    background: ${theme.colors.gradient.secondary};
-    border-radius: ${theme.borderRadius.lg};
-    z-index: -1;
-    transform: rotate(15deg);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(66, 99, 235, 0.1) 0%, rgba(66, 99, 235, 0) 70%);
+    bottom: -100px;
+    left: -100px;
+    z-index: 0;
+    pointer-events: none;
   }
-`;
-
-const MissionSection = styled.section`
-  padding: ${theme.spacing['4xl']} 0;
-  background-color: ${theme.colors.lightGray};
+  
+  @media (max-width: ${theme.breakpoints.md}) {
+    padding: ${theme.spacing['2xl']} ${theme.spacing.md};
+  }
 `;
 
 const MissionCards = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: ${theme.spacing.xl};
-  margin-top: ${theme.spacing['2xl']};
+  gap: ${theme.spacing.xl || '20px'};
+  margin-top: ${theme.spacing.lg || '16px'};
+  position: relative;
+  z-index: 1;
+  width: 100%;
   
-  @media (max-width: ${theme.breakpoints.lg}) {
+  @media (max-width: ${theme.breakpoints.lg || '1024px'}) {
     grid-template-columns: repeat(2, 1fr);
   }
   
-  @media (max-width: ${theme.breakpoints.md}) {
+  @media (max-width: ${theme.breakpoints.md || '768px'}) {
     grid-template-columns: 1fr;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    gap: ${theme.spacing.lg || '16px'};
   }
 `;
 
 const MissionCard = styled.div`
-  background-color: ${theme.colors.white};
-  border-radius: ${theme.borderRadius.xl};
+  background-color: #ffffff;
+  border-radius: ${theme.borderRadius.lg};
   padding: ${theme.spacing.xl};
-  box-shadow: ${theme.shadows.md};
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   text-align: center;
-  transition: ${theme.transitions.default};
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 250px;
   
   &:hover {
-    transform: translateY(-10px);
-    box-shadow: ${theme.shadows.lg};
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  @media (max-width: ${theme.breakpoints.sm}) {
+    padding: ${theme.spacing.lg};
+    min-height: auto;
   }
 `;
 
 const MissionIcon = styled.div`
-  width: 80px;
-  height: 80px;
-  background: ${theme.colors.gradient.primary};
-  border-radius: ${theme.borderRadius.full};
+  width: 70px;
+  height: 70px;
+  background-color: ${theme.colors.primary};
+  border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto ${theme.spacing.lg};
+  margin-bottom: ${theme.spacing.md};
   
   svg {
-    width: 40px;
-    height: 40px;
-    color: ${theme.colors.white};
+    width: 35px;
+    height: 35px;
+    color: #ffffff;
+  }
+  
+  @media (max-width: ${theme.breakpoints.sm}) {
+    width: 60px;
+    height: 60px;
+    
+    svg {
+      width: 30px;
+      height: 30px;
+    }
   }
 `;
 
@@ -201,157 +340,173 @@ const MissionTitle = styled.h3`
   font-weight: ${theme.typography.fontWeight.bold};
   margin-bottom: ${theme.spacing.md};
   color: ${theme.colors.dark};
+  position: relative;
+  display: inline-block;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 3px;
+    background: ${theme.colors.primary};
+    border-radius: 3px;
+  }
 `;
 
 const MissionDescription = styled.p`
   font-size: ${theme.typography.fontSize.md};
-  line-height: 1.6;
+  line-height: 1.7;
   color: ${theme.colors.gray};
 `;
 
-const SectionTitle = styled.h2`
-  font-size: ${theme.typography.fontSize['3xl']};
-  font-weight: ${theme.typography.fontWeight.bold};
-  margin-bottom: ${theme.spacing.xl};
-  color: ${theme.colors.dark};
-  text-align: center;
+const ValuesWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  padding: ${theme.spacing['4xl']} ${theme.spacing.xl};
+  background-color: #f8f9fc;
+  border-radius: ${theme.borderRadius.xl || '15px'};
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  overflow: visible;
+  display: block;
+  min-height: 300px;
+  margin-bottom: 20px;
+  z-index: 1;
   
-  .highlight {
-    color: ${theme.colors.primary};
+  &::before {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(66, 99, 235, 0.1) 0%, rgba(66, 99, 235, 0) 70%);
+    top: -150px;
+    right: -150px;
+    z-index: 0;
+    pointer-events: none;
   }
-`;
-
-const TeamSection = styled.section`
-  padding: ${theme.spacing['4xl']} 0;
-`;
-
-const TeamGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: ${theme.spacing.xl};
   
-  @media (max-width: ${theme.breakpoints.lg}) {
-    grid-template-columns: repeat(3, 1fr);
+  &::after {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(66, 99, 235, 0.1) 0%, rgba(66, 99, 235, 0) 70%);
+    bottom: -100px;
+    left: -100px;
+    z-index: 0;
+    pointer-events: none;
   }
   
   @media (max-width: ${theme.breakpoints.md}) {
-    grid-template-columns: repeat(2, 1fr);
+    padding: ${theme.spacing['2xl']} ${theme.spacing.md};
   }
-  
-  @media (max-width: ${theme.breakpoints.sm}) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const TeamMember = styled.div`
-  text-align: center;
-`;
-
-const TeamMemberImage = styled.div`
-  width: 200px;
-  height: 200px;
-  border-radius: ${theme.borderRadius.full};
-  overflow: hidden;
-  margin: 0 auto ${theme.spacing.md};
-  box-shadow: ${theme.shadows.md};
-  
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-`;
-
-const TeamMemberName = styled.h3`
-  font-size: ${theme.typography.fontSize.lg};
-  font-weight: ${theme.typography.fontWeight.bold};
-  margin-bottom: ${theme.spacing.xs};
-  color: ${theme.colors.dark};
-`;
-
-const TeamMemberRole = styled.p`
-  font-size: ${theme.typography.fontSize.base};
-  color: ${theme.colors.primary};
-  margin-bottom: ${theme.spacing.sm};
-`;
-
-const TeamMemberBio = styled.p`
-  font-size: ${theme.typography.fontSize.base};
-  color: ${theme.colors.gray};
-  line-height: 1.6;
-`;
-
-const ValuesSection = styled.section`
-  padding: ${theme.spacing['4xl']} 0;
-  background-color: ${theme.colors.lightGray};
 `;
 
 const ValuesGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: ${theme.spacing.xl};
+  grid-template-columns: repeat(3, 1fr);
+  gap: ${theme.spacing.xl || '20px'};
+  width: 100%;
+  margin-top: ${theme.spacing.xl || '20px'};
+  position: relative;
+  z-index: 1;
   
-  @media (max-width: ${theme.breakpoints.md}) {
+  @media (max-width: ${theme.breakpoints.lg || '1024px'}) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: ${theme.spacing.lg || '16px'};
+  }
+  
+  @media (max-width: ${theme.breakpoints.md || '768px'}) {
     grid-template-columns: 1fr;
+    max-width: 500px;
+    margin: ${theme.spacing.xl || '20px'} auto 0;
   }
 `;
 
 const ValueCard = styled.div`
   display: flex;
-  background-color: ${theme.colors.white};
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
   border-radius: ${theme.borderRadius.lg};
   padding: ${theme.spacing.lg};
-  box-shadow: ${theme.shadows.sm};
-  transition: ${theme.transitions.default};
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  text-align: center;
+  position: relative;
+  height: 100%;
   
   &:hover {
     transform: translateY(-5px);
-    box-shadow: ${theme.shadows.md};
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: ${theme.colors.primary};
+    border-radius: ${theme.borderRadius.lg} ${theme.borderRadius.lg} 0 0;
+  }
+  
+  @media (max-width: ${theme.breakpoints.sm}) {
+    padding: ${theme.spacing.md};
   }
 `;
 
 const ValueIcon = styled.div`
   width: 60px;
   height: 60px;
-  border-radius: ${theme.borderRadius.md};
-  background-color: ${theme.colors.lightGray};
+  border-radius: 15px;
+  background-color: #f0f4fa;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: ${theme.spacing.md};
-  flex-shrink: 0;
+  margin-bottom: ${theme.spacing.md};
   
   svg {
     width: 30px;
     height: 30px;
     color: ${theme.colors.primary};
   }
-`;
-
-const ValueContent = styled.div`
-  flex-grow: 1;
+  
+  @media (max-width: ${theme.breakpoints.sm}) {
+    width: 50px;
+    height: 50px;
+    
+    svg {
+      width: 25px;
+      height: 25px;
+    }
+  }
 `;
 
 const ValueTitle = styled.h3`
   font-size: ${theme.typography.fontSize.lg};
   font-weight: ${theme.typography.fontWeight.bold};
-  margin-bottom: ${theme.spacing.xs};
+  margin-bottom: ${theme.spacing.md};
   color: ${theme.colors.dark};
 `;
 
 const ValueDescription = styled.p`
-  font-size: ${theme.typography.fontSize.base};
+  font-size: ${theme.typography.fontSize.md};
   color: ${theme.colors.gray};
   line-height: 1.6;
   margin: 0;
 `;
 
 const CTASection = styled.section`
-  text-align: center;
-  padding: ${theme.spacing['4xl']} 0;
-  background: ${theme.colors.gradient.primary};
-  color: ${theme.colors.white};
   position: relative;
+  padding: ${theme.spacing['5xl']} 0;
+  background: linear-gradient(135deg, ${theme.colors.primary} 0%, #4a80ff 100%);
+  color: ${theme.colors.white};
   overflow: hidden;
   
   &::before {
@@ -362,19 +517,35 @@ const CTASection = styled.section`
     width: 100%;
     height: 100%;
     background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'%3E%3Ccircle cx='20' cy='20' r='5'/%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.6;
     z-index: 0;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+    top: -200px;
+    right: -200px;
   }
 `;
 
 const CTAContent = styled.div`
   position: relative;
   z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
 `;
 
 const CTATitle = styled.h2`
-  font-size: ${theme.typography.fontSize['3xl']};
+  font-size: clamp(${theme.typography.fontSize['2xl']}, 4vw, ${theme.typography.fontSize['4xl']});
   font-weight: ${theme.typography.fontWeight.bold};
-  margin-bottom: ${theme.spacing.md};
+  margin-bottom: ${theme.spacing.lg};
+  line-height: 1.2;
 `;
 
 const CTADescription = styled.p`
@@ -382,6 +553,23 @@ const CTADescription = styled.p`
   max-width: 700px;
   margin: 0 auto ${theme.spacing.xl};
   line-height: 1.6;
+`;
+
+const CTAButton = styled(Button)`
+  position: relative;
+  background: transparent;
+  border: 2px solid ${theme.colors.white};
+  color: ${theme.colors.white};
+  font-weight: ${theme.typography.fontWeight.bold};
+  padding: ${theme.spacing.md} ${theme.spacing.xl};
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: ${theme.colors.white};
+    color: ${theme.colors.primary};
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
 `;
 
 const About: React.FC = () => {
@@ -395,11 +583,11 @@ const About: React.FC = () => {
     
     // Hero section animations
     animations.push(
-      gsap.from('.about-hero-text', {
-        y: 30,
+      gsap.from('.hero-content > *', {
+        y: 50,
         opacity: 0,
-        duration: 0.8,
-        stagger: 0.2,
+        duration: 1,
+        stagger: 0.3,
         ease: 'power3.out',
       })
     );
@@ -411,24 +599,10 @@ const About: React.FC = () => {
           trigger: '.story-section',
           start: 'top 75%',
         },
-        x: -50,
+        y: 50,
         opacity: 0,
         duration: 0.8,
         ease: 'power3.out',
-      })
-    );
-    
-    animations.push(
-      gsap.from('.story-image', {
-        scrollTrigger: {
-          trigger: '.story-section',
-          start: 'top 75%',
-        },
-        x: 50,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-        delay: 0.2,
       })
     );
     
@@ -437,28 +611,13 @@ const About: React.FC = () => {
       gsap.from('.mission-card', {
         scrollTrigger: {
           trigger: '.mission-section',
-          start: 'top 50%',
+          start: 'top 75%',
         },
-        y: 50,
-        opacity: 0.5,
+        // y: 50,
+        // opacity: 1,
         // duration: 0.8,
-        // stagger: 0.8,
+        // stagger: 0.2,
         // ease: 'power3.out',
-      })
-    );
-    
-    // Team members animations
-    animations.push(
-      gsap.from('.team-member', {
-        scrollTrigger: {
-          trigger: '.team-section',
-          start: 'top 80%',
-        },
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: 'power3.out',
       })
     );
     
@@ -467,7 +626,7 @@ const About: React.FC = () => {
       gsap.from('.value-card', {
         scrollTrigger: {
           trigger: '.values-section',
-          start: 'top 80%',
+          start: 'top 75%',
         },
         // y: 30,
         // opacity: 0,
@@ -495,7 +654,9 @@ const About: React.FC = () => {
     // Return cleanup function
     return () => {
       // Kill all animations
-      animations.forEach(anim => anim?.kill());
+      animations.forEach(anim => {
+        if (anim) anim.kill();
+      });
       
       // Clean up ScrollTrigger instances
       if (ScrollTrigger) {
@@ -512,264 +673,184 @@ const About: React.FC = () => {
       </Helmet>
       
       <AboutHero>
-        <AboutContainer>
-          <AboutTitle className="about-hero-text">About OMEGASIS AI</AboutTitle>
-          <AboutSubtitle className="about-hero-text">
+        <HeroDecoration />
+        <HeroContent className="hero-content">
+          <AboutTitle>About OMEGASIS AI</AboutTitle>
+          <AboutSubtitle>
             We're on a mission to revolutionize business communication through intelligent AI solutions that enhance customer engagement and drive growth.
           </AboutSubtitle>
-        </AboutContainer>
+        </HeroContent>
       </AboutHero>
       
-      <StorySection className="story-section">
+      <Section className="story-section">
         <AboutContainer>
-          <StoryGrid>
-            <StoryContent className="story-content">
-              <StoryTitle>
-                Our <span className="highlight">Story</span>
-              </StoryTitle>
-              <StoryText>
-                <p>
-                  OMEGASIS AI was founded in 2022 by a team of AI enthusiasts, developers, and business strategists who recognized the transformative potential of conversational AI for businesses of all sizes.
-                </p>
-                <p>
-                  What began as a research project quickly evolved into a full-service AI solution provider as we witnessed the challenges businesses faced in adapting to rapidly changing customer communication needs.
-                </p>
-                <p>
-                  Today, we're proud to serve hundreds of clients worldwide, helping them leverage the power of AI to create meaningful connections with their customers, streamline operations, and drive business growth.
-                </p>
-                <p>
-                  Our team combines deep technical expertise in natural language processing and machine learning with a passion for customer experience, enabling us to deliver AI solutions that feel remarkably human while delivering measurable business results.
-                </p>
-              </StoryText>
-              <Button variant="primary" size="lg" to="/contact">
+          <SectionTitle>
+            Our <span className="highlight">Story</span>
+          </SectionTitle>
+          <StoryContainer className="story-content">
+            <StoryText>
+              <p>
+                OMEGASIS AI was founded in 2025 with a bold mission — to make powerful AI accessible to everyday businesses. What started as a solo venture quickly gained traction by solving a common challenge: missed calls, unanswered queries, and lost opportunities.
+              </p>
+              <p>
+                As the founder, I wear many hats — from developing chatbots to meeting with clients — ensuring each solution is tailored to real business needs.
+              </p>
+              <p>
+                Our services may be lean right now, but they're mighty — and growing fast. With every client we help, OMEGASIS AI moves one step closer to becoming Australia's most trusted name in AI-powered business automation.
+              </p>
+            </StoryText>
+            <ButtonWrapper>
+              <Button 
+                variant="primary" 
+                size="lg" 
+                to="/contact"
+                style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '8px', 
+                  padding: '12px 28px',
+                  borderRadius: '30px',
+                  boxShadow: '0 10px 20px rgba(66, 99, 235, 0.2)'
+                }}
+              >
                 Get to Know Us
+                <ArrowRight size={18} />
               </Button>
-            </StoryContent>
-            
-            <StoryImage className="story-image">
-              <img src="/src/assets/images/about-team.jpg" alt="OMEGASIS AI Team" />
-            </StoryImage>
-          </StoryGrid>
+            </ButtonWrapper>
+          </StoryContainer>
         </AboutContainer>
-      </StorySection>
+      </Section>
       
-      <MissionSection className="mission-section">
+      {/* Mission Section */}
+      <Section className="mission-section" style={{ backgroundColor: '#f9f9f9' }}>
         <AboutContainer>
           <SectionTitle>
             Our <span className="highlight">Mission</span>
           </SectionTitle>
           
-          <MissionCards>
-            <MissionCard className="mission-card">
-              <MissionIcon>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
-                  <line x1="16" y1="8" x2="2" y2="22"></line>
-                  <line x1="17.5" y1="15" x2="9" y2="15"></line>
-                </svg>
-              </MissionIcon>
-              <MissionTitle>Innovate</MissionTitle>
-              <MissionDescription>
-                We're committed to pushing the boundaries of what's possible with AI, continuously enhancing our technologies to create smarter, more intuitive solutions for our clients.
-              </MissionDescription>
-            </MissionCard>
-            
-            <MissionCard className="mission-card">
-              <MissionIcon>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="9" cy="7" r="4"></circle>
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                </svg>
-              </MissionIcon>
-              <MissionTitle>Empower</MissionTitle>
-              <MissionDescription>
-                We believe in democratizing AI technology, making it accessible and actionable for businesses of all sizes to enhance their customer engagement strategies.
-              </MissionDescription>
-            </MissionCard>
-            
-            <MissionCard className="mission-card">
-              <MissionIcon>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-                  <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-                </svg>
-              </MissionIcon>
-              <MissionTitle>Transform</MissionTitle>
-              <MissionDescription>
-                Our mission is to transform how businesses communicate, replacing outdated systems with intelligent solutions that adapt and scale to meet evolving customer expectations.
-              </MissionDescription>
-            </MissionCard>
-          </MissionCards>
+          <MissionWrapper style={{ border: '1px solid #eee' }}>
+            <MissionCards>
+              <MissionCard className="mission-card">
+                <MissionIcon>
+                  <Pen size={30} />
+                </MissionIcon>
+                <MissionTitle>Innovate</MissionTitle>
+                <MissionDescription>
+                  We're committed to pushing the boundaries of what's possible with AI, continuously enhancing our technologies to create smarter, more intuitive solutions for our clients.
+                </MissionDescription>
+              </MissionCard>
+              
+              <MissionCard className="mission-card">
+                <MissionIcon>
+                  <Users size={30} />
+                </MissionIcon>
+                <MissionTitle>Empower</MissionTitle>
+                <MissionDescription>
+                  We believe in democratizing AI technology, making it accessible and actionable for businesses of all sizes to enhance their customer engagement strategies.
+                </MissionDescription>
+              </MissionCard>
+              
+              <MissionCard className="mission-card">
+                <MissionIcon>
+                  <Bell size={30} />
+                </MissionIcon>
+                <MissionTitle>Transform</MissionTitle>
+                <MissionDescription>
+                  Our mission is to transform how businesses communicate, replacing outdated systems with intelligent solutions that adapt and scale to meet evolving customer expectations.
+                </MissionDescription>
+              </MissionCard>
+            </MissionCards>
+          </MissionWrapper>
         </AboutContainer>
-      </MissionSection>
+      </Section>
       
-      <TeamSection className="team-section">
-        <AboutContainer>
-          <SectionTitle>
-            Meet Our <span className="highlight">Team</span>
-          </SectionTitle>
-          
-          <TeamGrid>
-            <TeamMember className="team-member">
-              <TeamMemberImage>
-                <img src="/src/assets/images/team/member1.jpg" alt="Team Member" />
-              </TeamMemberImage>
-              <TeamMemberName>Michael Thompson</TeamMemberName>
-              <TeamMemberRole>CEO & Co-Founder</TeamMemberRole>
-              <TeamMemberBio>
-                AI visionary with 15+ years of experience in tech leadership and product development.
-              </TeamMemberBio>
-            </TeamMember>
-            
-            <TeamMember className="team-member">
-              <TeamMemberImage>
-                <img src="/src/assets/images/team/member2.jpg" alt="Team Member" />
-              </TeamMemberImage>
-              <TeamMemberName>Sarah Chen</TeamMemberName>
-              <TeamMemberRole>CTO & Co-Founder</TeamMemberRole>
-              <TeamMemberBio>
-                Machine learning expert with previous experience at leading AI research labs.
-              </TeamMemberBio>
-            </TeamMember>
-            
-            <TeamMember className="team-member">
-              <TeamMemberImage>
-                <img src="/src/assets/images/team/member3.jpg" alt="Team Member" />
-              </TeamMemberImage>
-              <TeamMemberName>David Rodriguez</TeamMemberName>
-              <TeamMemberRole>Head of Product</TeamMemberRole>
-              <TeamMemberBio>
-                Product strategist focused on creating AI solutions that solve real business challenges.
-              </TeamMemberBio>
-            </TeamMember>
-            
-            <TeamMember className="team-member">
-              <TeamMemberImage>
-                <img src="/src/assets/images/team/member4.jpg" alt="Team Member" />
-              </TeamMemberImage>
-              <TeamMemberName>Emily Nguyen</TeamMemberName>
-              <TeamMemberRole>Director of Customer Success</TeamMemberRole>
-              <TeamMemberBio>
-                Dedicated to ensuring clients achieve measurable results with our AI solutions.
-              </TeamMemberBio>
-            </TeamMember>
-          </TeamGrid>
-        </AboutContainer>
-      </TeamSection>
-      
-      <ValuesSection className="values-section">
+      {/* Values Section */}
+      <Section className="values-section" style={{ backgroundColor: '#f5f5f5' }}>
         <AboutContainer>
           <SectionTitle>
             Our <span className="highlight">Values</span>
           </SectionTitle>
           
-          <ValuesGrid>
-            <ValueCard className="value-card">
-              <ValueIcon>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                </svg>
-              </ValueIcon>
-              <ValueContent>
+          <ValuesWrapper style={{ border: '1px solid #eee' }}>
+            <ValuesGrid>
+              <ValueCard className="value-card">
+                <ValueIcon>
+                  <Check size={25} />
+                </ValueIcon>
                 <ValueTitle>Excellence</ValueTitle>
                 <ValueDescription>
                   We're committed to delivering the highest quality AI solutions that exceed client expectations and drive meaningful results.
                 </ValueDescription>
-              </ValueContent>
-            </ValueCard>
-            
-            <ValueCard className="value-card">
-              <ValueIcon>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                </svg>
-              </ValueIcon>
-              <ValueContent>
+              </ValueCard>
+              
+              <ValueCard className="value-card">
+                <ValueIcon>
+                  <Star size={25} />
+                </ValueIcon>
                 <ValueTitle>Innovation</ValueTitle>
                 <ValueDescription>
                   We continuously push the boundaries of AI technology, staying ahead of industry trends to provide cutting-edge solutions.
                 </ValueDescription>
-              </ValueContent>
-            </ValueCard>
-            
-            <ValueCard className="value-card">
-              <ValueIcon>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                  <circle cx="12" cy="12" r="3"></circle>
-                </svg>
-              </ValueIcon>
-              <ValueContent>
+              </ValueCard>
+              
+              <ValueCard className="value-card">
+                <ValueIcon>
+                  <Eye size={25} />
+                </ValueIcon>
                 <ValueTitle>Transparency</ValueTitle>
                 <ValueDescription>
                   We believe in open communication about our technologies, processes, and results, building trust with clients through honesty.
                 </ValueDescription>
-              </ValueContent>
-            </ValueCard>
-            
-            <ValueCard className="value-card">
-              <ValueIcon>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-                  <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-                </svg>
-              </ValueIcon>
-              <ValueContent>
+              </ValueCard>
+              
+              <ValueCard className="value-card">
+                <ValueIcon>
+                  <Clipboard size={25} />
+                </ValueIcon>
                 <ValueTitle>Responsibility</ValueTitle>
                 <ValueDescription>
                   We develop AI with a strong ethical foundation, ensuring our technology is used responsibly and benefits society.
                 </ValueDescription>
-              </ValueContent>
-            </ValueCard>
-            
-            <ValueCard className="value-card">
-              <ValueIcon>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <path d="M12 8l4 4-4 4M8 12h7"></path>
-                </svg>
-              </ValueIcon>
-              <ValueContent>
+              </ValueCard>
+              
+              <ValueCard className="value-card">
+                <ValueIcon>
+                  <ArrowRight size={25} />
+                </ValueIcon>
                 <ValueTitle>Adaptability</ValueTitle>
                 <ValueDescription>
                   We embrace change and continuously evolve our solutions to meet emerging challenges and opportunities in AI technology.
                 </ValueDescription>
-              </ValueContent>
-            </ValueCard>
-            
-            <ValueCard className="value-card">
-              <ValueIcon>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="9" cy="7" r="4"></circle>
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                </svg>
-              </ValueIcon>
-              <ValueContent>
+              </ValueCard>
+              
+              <ValueCard className="value-card">
+                <ValueIcon>
+                  <UserPlus size={25} />
+                </ValueIcon>
                 <ValueTitle>Collaboration</ValueTitle>
                 <ValueDescription>
                   We work closely with our clients as partners, combining our AI expertise with their industry knowledge to create optimal solutions.
                 </ValueDescription>
-              </ValueContent>
-            </ValueCard>
-          </ValuesGrid>
+              </ValueCard>
+            </ValuesGrid>
+          </ValuesWrapper>
         </AboutContainer>
-      </ValuesSection>
+      </Section>
       
       <CTASection className="cta-section">
         <AboutContainer>
-          <CTAContent>
+          <CTAContent className="cta-content">
             <CTATitle>Ready to Transform Your Business with AI?</CTATitle>
             <CTADescription>
               Let's discuss how our team of experts can help you implement AI solutions that drive real business results.
             </CTADescription>
-            <Button variant="outline" size="lg" to="/contact">
+            <CTAButton 
+              variant="outline" 
+              size="lg" 
+              to="/contact"
+            >
               Get Started Today
-            </Button>
+            </CTAButton>
           </CTAContent>
         </AboutContainer>
       </CTASection>

@@ -250,11 +250,11 @@ const Services: React.FC = () => {
     if (!pageRef.current) return;
     
     gsap.from('.services-hero-text', {
-      y: 30,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.2,
-      ease: 'power3.out',
+      // y: 30,
+      // opacity: 0,
+      // duration: 0.8,
+      // stagger: 0.2,
+      // ease: 'power3.out',
     });
     
     gsap.from('.service-card', {
@@ -262,11 +262,11 @@ const Services: React.FC = () => {
         trigger: '.services-grid',
         start: 'top 80%',
       },
-      y: 50,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.15,
-      ease: 'power3.out',
+      // y: 50,
+      // opacity: 0,
+      // duration: 0.8,
+      // stagger: 0.15,
+      // ease: 'power3.out',
     });
 
     gsap.from('.service-card-top', {

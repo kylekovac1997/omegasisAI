@@ -9,7 +9,7 @@ interface Testimonial {
   name: string;
   position: string;
   company: string;
-  avatar: string;
+  avatar?: string;
   quote: string;
   rating: number;
 }
@@ -242,9 +242,9 @@ const SliderDot = styled.button<{ $active: boolean }>`
 const testimonials: Testimonial[] = [
   {
     id: 1,
-    name: 'Sarah Johnson',
-    position: 'Marketing Director',
-    company: 'TechGrowth Inc.',
+    name: 'kyle',
+    position: ' Director',
+    company: 'KKFLOORING',
     avatar: '/src/assets/images/testimonials/avatar1.jpg',
     quote: 'The AI chatbot from OMEGASIS AI has completely transformed how we engage with customers. Response times have decreased by 80%, and customer satisfaction rates have soared.',
     rating: 5,
@@ -252,38 +252,29 @@ const testimonials: Testimonial[] = [
   {
     id: 2,
     name: 'David Chen',
-    position: 'E-Commerce Manager',
-    company: 'ShopNow.com',
+    position: 'Owner',
+    company: 'Kvatch',
     avatar: '/src/assets/images/testimonials/avatar2.jpg',
-    quote: 'Implementing the AI Virtual Assistant for our online store has increased our conversion rates by 45%. The personalized product recommendations are spot on!',
+    quote: 'Implementing the AI Virtual Assistant for our online shopify store has increased our conversion rates by 45%. The personalized product recommendations are spot on!',
     rating: 5,
   },
   {
     id: 3,
     name: 'Michael Rodriguez',
-    position: 'Customer Support Lead',
-    company: 'ServiceFirst',
+    position: 'Owner',
+    company: 'MicPlumbing',
     avatar: '/src/assets/images/testimonials/avatar3.jpg',
-    quote: 'The multilingual capabilities of OMEGASIS chatbots allowed us to expand globally without hiring additional support staff. Our customers can now get help in their native language 24/7.',
+    quote: 'The  capabilities of OMEGASIS chatbots allowed us to expand  without hiring additional support staff. Our customers can now get 24/7.',
     rating: 4,
   },
   {
     id: 4,
-    name: 'Emily Thompson',
-    position: 'Sales Director',
-    company: 'GrowthPartners LLC',
+    name: 'Micheal Dellar',
+    position: ' Director',
+    company: 'DCK Electrical',
     avatar: '/src/assets/images/testimonials/avatar4.jpg',
-    quote: 'The lead qualification chatbot has transformed our sales pipeline. Our team now focuses solely on highly qualified leads, resulting in a 60% increase in close rates.',
+    quote: "The 24/7 AI receptionist has completely streamlined our front desk. Calls are answered instantly, bookings are handled automatically, and our staff can now focus on delivering better service — it's like having a perfect employee who never sleeps.",
     rating: 5,
-  },
-  {
-    id: 5,
-    name: 'Robert Williams',
-    position: 'Digital Strategy Head',
-    company: 'InnovateNow',
-    avatar: '/src/assets/images/testimonials/avatar5.jpg',
-    quote: "Social media engagement increased by 200% after implementing OMEGASIS AI's automation tools. The chatbots handle routine inquiries perfectly while maintaining our brand voice.",
-    rating: 4,
   },
 ];
 
@@ -425,9 +416,9 @@ const Testimonials: React.FC = () => {
                 <TestimonialQuote>"{testimonial.quote}"</TestimonialQuote>
                 <StarRating rating={testimonial.rating} />
                 <TestimonialAuthor>
-                  <AuthorAvatar>
+                  {/* <AuthorAvatar>
                     <img src={testimonial.avatar} alt={testimonial.name} />
-                  </AuthorAvatar>
+                  </AuthorAvatar> */}
                   <AuthorInfo>
                     <AuthorName>{testimonial.name}</AuthorName>
                     <AuthorPosition>

@@ -4,6 +4,21 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { theme } from '../../styles/theme';
 import Button from '../../components/common/Button';
+// Import Font Awesome for icons
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+  faLanguage, 
+  faGlobe, 
+  faExchangeAlt, 
+  faHandshake, 
+  faCodeBranch,
+  faUsers,
+  faComments,
+  faSignal,
+  faChartLine,
+  faHeadset,
+  faClock
+} from '@fortawesome/free-solid-svg-icons';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -314,13 +329,6 @@ const BenefitDescription = styled.p`
   margin: 0;
 `;
 
-
-
-
-
-
-
-
 const CTASection = styled.section`
   text-align: center;
   padding: ${theme.spacing['3xl']};
@@ -521,7 +529,9 @@ const MultilingualChatbots: React.FC = () => {
           <SectionTitle>Key <span className="highlight">Features</span></SectionTitle>
           <FeaturesGrid>
             <FeatureCard className="feature-card">
-              <FeatureIcon><i className="fas fa-language" /></FeatureIcon>
+              <FeatureIcon>
+                <FontAwesomeIcon icon={faLanguage} />
+              </FeatureIcon>
               <FeatureTitle>100+ Languages Supported</FeatureTitle>
               <FeatureDescription>
                 From Spanish to Swahili — engage users in their preferred language automatically.
@@ -529,7 +539,9 @@ const MultilingualChatbots: React.FC = () => {
             </FeatureCard>
 
             <FeatureCard className="feature-card">
-              <FeatureIcon><i className="fas fa-globe" /></FeatureIcon>
+              <FeatureIcon>
+                <FontAwesomeIcon icon={faGlobe} />
+              </FeatureIcon>
               <FeatureTitle>Geo-Targeted Language Switching</FeatureTitle>
               <FeatureDescription>
                 Automatically detect user location and browser language to deliver the right experience.
@@ -537,7 +549,9 @@ const MultilingualChatbots: React.FC = () => {
             </FeatureCard>
 
             <FeatureCard className="feature-card">
-              <FeatureIcon><i className="fas fa-exchange-alt" /></FeatureIcon>
+              <FeatureIcon>
+                <FontAwesomeIcon icon={faExchangeAlt} />
+              </FeatureIcon>
               <FeatureTitle>Real-Time Translation</FeatureTitle>
               <FeatureDescription>
                 Translate messages on the fly without delays or awkward phrasing.
@@ -545,7 +559,9 @@ const MultilingualChatbots: React.FC = () => {
             </FeatureCard>
 
             <FeatureCard className="feature-card">
-              <FeatureIcon><i className="fas fa-handshake" /></FeatureIcon>
+              <FeatureIcon>
+                <FontAwesomeIcon icon={faHandshake} />
+              </FeatureIcon>
               <FeatureTitle>Cultural Sensitivity</FeatureTitle>
               <FeatureDescription>
                 Localized responses adapt to cultural norms, slang, and tone of voice.
@@ -553,7 +569,9 @@ const MultilingualChatbots: React.FC = () => {
             </FeatureCard>
 
             <FeatureCard className="feature-card">
-              <FeatureIcon><i className="fas fa-code-branch" /></FeatureIcon>
+              <FeatureIcon>
+                <FontAwesomeIcon icon={faCodeBranch} />
+              </FeatureIcon>
               <FeatureTitle>Multi-Language Flows</FeatureTitle>
               <FeatureDescription>
                 Build separate conversation flows in different languages under one chatbot logic.
@@ -615,7 +633,9 @@ const MultilingualChatbots: React.FC = () => {
           </SectionTitle>
           <BenefitsGrid>
             <BenefitCard className="benefit-card">
-              <BenefitIcon><i className="fas fa-users" /></BenefitIcon>
+              <BenefitIcon>
+                <FontAwesomeIcon icon={faUsers} />
+              </BenefitIcon>
               <BenefitContent>
                 <BenefitTitle>Serve a Broader Audience</BenefitTitle>
                 <BenefitDescription>
@@ -625,7 +645,9 @@ const MultilingualChatbots: React.FC = () => {
             </BenefitCard>
 
             <BenefitCard className="benefit-card">
-              <BenefitIcon><i className="fas fa-comments" /></BenefitIcon>
+              <BenefitIcon>
+                <FontAwesomeIcon icon={faComments} />
+              </BenefitIcon>
               <BenefitContent>
                 <BenefitTitle>Improve Customer Satisfaction</BenefitTitle>
                 <BenefitDescription>
@@ -635,11 +657,49 @@ const MultilingualChatbots: React.FC = () => {
             </BenefitCard>
 
             <BenefitCard className="benefit-card">
-              <BenefitIcon><i className="fas fa-signal" /></BenefitIcon>
+              <BenefitIcon>
+                <FontAwesomeIcon icon={faSignal} />
+              </BenefitIcon>
               <BenefitContent>
                 <BenefitTitle>Boost Engagement</BenefitTitle>
                 <BenefitDescription>
                   Higher relevance = higher engagement and more conversions.
+                </BenefitDescription>
+              </BenefitContent>
+            </BenefitCard>
+
+            <BenefitCard className="benefit-card">
+              <BenefitIcon>
+                <FontAwesomeIcon icon={faHeadset} />
+              </BenefitIcon>
+              <BenefitContent>
+                <BenefitTitle>24/7 Multilingual Support</BenefitTitle>
+                <BenefitDescription>
+                  Provide round-the-clock customer service in multiple languages automatically.
+                </BenefitDescription>
+              </BenefitContent>
+            </BenefitCard>
+
+            <BenefitCard className="benefit-card">
+              <BenefitIcon>
+                <FontAwesomeIcon icon={faChartLine} />
+              </BenefitIcon>
+              <BenefitContent>
+                <BenefitTitle>Grow International Sales</BenefitTitle>
+                <BenefitDescription>
+                  Remove language barriers to purchasing with localized checkout support.
+                </BenefitDescription>
+              </BenefitContent>
+            </BenefitCard>
+
+            <BenefitCard className="benefit-card">
+              <BenefitIcon>
+                <FontAwesomeIcon icon={faClock} />
+              </BenefitIcon>
+              <BenefitContent>
+                <BenefitTitle>Reduce Response Time</BenefitTitle>
+                <BenefitDescription>
+                  Eliminate waiting for human translators with instant AI-powered communication.
                 </BenefitDescription>
               </BenefitContent>
             </BenefitCard>

@@ -267,28 +267,29 @@ const About: React.FC = () => {
             About <span className="highlight">OMEGASIS AI</span>
           </AboutTitle>
           <AboutDescription>
-            <p>
-              OMEGASIS AI is a leading provider of AI-powered chatbot and automation solutions designed to transform how businesses connect with their customers.
-            </p>
-            <p>
-              Founded in 2022, we've quickly grown to become a trusted partner for businesses seeking to enhance their communication strategies with advanced AI technology.
-            </p>
-            <p>
-              Our team of AI experts and industry specialists work closely with each client to develop tailored solutions that address specific business challenges and drive measurable results.
-            </p>
+          <p>
+  OMEGASIS AI delivers cutting-edge AI-powered chatbot and automation solutions that help businesses revolutionize customer engagement.
+</p>
+<p>
+  Launched in 2025, we’re already partnering with forward-thinking businesses to streamline communication and boost efficiency through smart, scalable AI systems.
+</p>
+<p>
+  Our dedicated team works hand-in-hand with clients to craft tailored solutions that solve real-world challenges and deliver measurable results.
+</p>
+
           </AboutDescription>
           
           <AboutStats ref={statsRef}>
             <StatItem>
-              <StatNumber>300+</StatNumber>
-              <StatLabel>Clients Worldwide</StatLabel>
+              <StatNumber>10+</StatNumber>
+              <StatLabel>Clients Nationwide</StatLabel>
             </StatItem>
             <StatItem>
               <StatNumber>98%</StatNumber>
               <StatLabel>Client Satisfaction</StatLabel>
             </StatItem>
             <StatItem>
-              <StatNumber>5M+</StatNumber>
+              <StatNumber>1M+</StatNumber>
               <StatLabel>Conversations Managed</StatLabel>
             </StatItem>
           </AboutStats>
@@ -299,24 +300,25 @@ const About: React.FC = () => {
         </AboutContent>
         
         <AboutImage ref={imageRef}>
-          <div className="accent-shape shape1"></div>
-          <div className="accent-shape shape2"></div>
-          <img 
-            src="/src/assets/images/about-img.jpg" 
-            alt="OMEGASIS AI Team" 
-            className="main-image"
-          />
-          <div className="floating-card" ref={floatingCardRef}>
-            <div className="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-              </svg>
-            </div>
-            <div className="content">
-              <h4>Industry Recognition</h4>
-              <p>Named "Top AI Innovation Company" by Tech Innovators 2024</p>
-            </div>
-          </div>
+        {/* <div className="accent-shape shape1"></div>
+<div className="accent-shape shape2"></div> */}
+{/* <img 
+  src="/src/assets/images/about-img.jpg" 
+  alt="OMEGASIS AI Team" 
+  className="main-image"
+/> */}
+<div className="floating-card" ref={floatingCardRef}>
+  <div className="icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+    </svg>
+  </div>
+  <div className="content">
+    <h4>Innovation in Progress</h4>
+    <p>Delivering real-time AI receptionist solutions from day one</p>
+  </div>
+</div>
+
         </AboutImage>
       </AboutContainer>
     </AboutSection>

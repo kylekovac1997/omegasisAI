@@ -5,6 +5,27 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { theme } from '../../styles/theme';
 import Button from '../../components/common/Button';
 
+// Import FontAwesome
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+  faRobot, 
+  faCogs, 
+  faPaintBrush, 
+  faPlug, 
+  faBrain, 
+  faChartLine, 
+  faShieldAlt, 
+  faQuestion,
+  faQuestionCircle,
+  faStar,
+  faPuzzlePiece,
+  faDraftingCompass,
+  faUserShield,
+  faTachometerAlt,
+  faThumbsUp,
+  faRocket
+} from '@fortawesome/free-solid-svg-icons';
+
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
@@ -26,6 +47,27 @@ const ServiceContainer = styled.div`
 const ServiceHeader = styled.div`
   text-align: center;
   margin-bottom: ${theme.spacing['3xl']};
+`;
+
+const HeaderIconWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+`;
+
+const HeaderIcon = styled.div`
+  width: 80px;
+  height: 80px;
+  background-color: ${theme.colors.lightGray};
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  svg {
+    font-size: 40px;
+    color: ${theme.colors.primary};
+  }
 `;
 
 const ServiceTitle = styled.h1`
@@ -95,12 +137,26 @@ const FeaturesSection = styled.section`
   margin-bottom: ${theme.spacing['4xl']};
 `;
 
+const SectionTitleWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  
+  svg {
+    font-size: 24px;
+    color: ${theme.colors.primary};
+    margin: 0 10px;
+  }
+`;
+
 const SectionTitle = styled.h2`
   font-size: ${theme.typography.fontSize['2xl']};
   font-weight: ${theme.typography.fontWeight.bold};
   margin-bottom: ${theme.spacing.xl};
   color: ${theme.colors.dark};
   text-align: center;
+  margin: 0;
   
   .highlight {
     color: ${theme.colors.primary};
@@ -145,8 +201,7 @@ const FeatureIcon = styled.div`
   margin-bottom: ${theme.spacing.md};
   
   svg {
-    width: 30px;
-    height: 30px;
+    font-size: 28px;
     color: ${theme.colors.primary};
   }
 `;
@@ -290,8 +345,7 @@ const BenefitIcon = styled.div`
   flex-shrink: 0;
   
   svg {
-    width: 25px;
-    height: 25px;
+    font-size: 24px;
     color: ${theme.colors.primary};
   }
 `;
@@ -313,13 +367,6 @@ const BenefitDescription = styled.p`
   line-height: 1.6;
   margin: 0;
 `;
-
-
-
-
-
-
-
 
 const CTASection = styled.section`
   text-align: center;
@@ -500,11 +547,16 @@ const CustomChatbotDevelopment: React.FC = () => {
     <ServiceWrapper ref={sectionRef}>
       <ServiceContainer>
         <ServiceHeader>
+          <HeaderIconWrapper className="service-header-anim">
+            <HeaderIcon>
+              <FontAwesomeIcon icon={faRobot} />
+            </HeaderIcon>
+          </HeaderIconWrapper>
           <ServiceTitle className="service-header-anim">
             Custom <span className="highlight">AI Chatbot Development</span>
           </ServiceTitle>
           <ServiceDescription className="service-header-anim">
-            Your business is unique — your chatbot should be too. We build tailored AI bots that integrate deeply into your workflow and speak your brand’s voice.
+            Your business is unique — your chatbot should be too. We build tailored AI bots that integrate deeply into your workflow and speak your brand's voice.
           </ServiceDescription>
         </ServiceHeader>
 
@@ -518,10 +570,16 @@ const CustomChatbotDevelopment: React.FC = () => {
         </ServiceBanner>
 
         <FeaturesSection className="features-section">
-          <SectionTitle>Key <span className="highlight">Features</span></SectionTitle>
+          <SectionTitleWrapper>
+            <FontAwesomeIcon icon={faStar} />
+            <SectionTitle>Key <span className="highlight">Features</span></SectionTitle>
+            <FontAwesomeIcon icon={faStar} />
+          </SectionTitleWrapper>
           <FeaturesGrid>
             <FeatureCard className="feature-card">
-              <FeatureIcon><i className="fas fa-cogs" /></FeatureIcon>
+              <FeatureIcon>
+                <FontAwesomeIcon icon={faCogs} />
+              </FeatureIcon>
               <FeatureTitle>Custom Workflows</FeatureTitle>
               <FeatureDescription>
                 Build unique question paths, actions, and integrations tailored to your business logic.
@@ -529,7 +587,9 @@ const CustomChatbotDevelopment: React.FC = () => {
             </FeatureCard>
 
             <FeatureCard className="feature-card">
-              <FeatureIcon><i className="fas fa-tools" /></FeatureIcon>
+              <FeatureIcon>
+                <FontAwesomeIcon icon={faPaintBrush} />
+              </FeatureIcon>
               <FeatureTitle>Full Brand Personalization</FeatureTitle>
               <FeatureDescription>
                 Match tone, language, and personality to your business brand and audience type.
@@ -537,7 +597,9 @@ const CustomChatbotDevelopment: React.FC = () => {
             </FeatureCard>
 
             <FeatureCard className="feature-card">
-              <FeatureIcon><i className="fas fa-code" /></FeatureIcon>
+              <FeatureIcon>
+                <FontAwesomeIcon icon={faPlug} />
+              </FeatureIcon>
               <FeatureTitle>Advanced Integrations</FeatureTitle>
               <FeatureDescription>
                 Connect to CRMs, ERPs, calendars, booking systems, and internal tools.
@@ -545,7 +607,9 @@ const CustomChatbotDevelopment: React.FC = () => {
             </FeatureCard>
 
             <FeatureCard className="feature-card">
-              <FeatureIcon><i className="fas fa-robot" /></FeatureIcon>
+              <FeatureIcon>
+                <FontAwesomeIcon icon={faBrain} />
+              </FeatureIcon>
               <FeatureTitle>Natural Language Understanding</FeatureTitle>
               <FeatureDescription>
                 Create intelligent, dynamic conversations that adapt to your users' inputs.
@@ -553,17 +617,33 @@ const CustomChatbotDevelopment: React.FC = () => {
             </FeatureCard>
 
             <FeatureCard className="feature-card">
-              <FeatureIcon><i className="fas fa-chart-pie" /></FeatureIcon>
+              <FeatureIcon>
+                <FontAwesomeIcon icon={faChartLine} />
+              </FeatureIcon>
               <FeatureTitle>Custom Analytics</FeatureTitle>
               <FeatureDescription>
                 Track exactly what matters to you with customizable reporting and dashboards.
+              </FeatureDescription>
+            </FeatureCard>
+
+            <FeatureCard className="feature-card">
+              <FeatureIcon>
+                <FontAwesomeIcon icon={faShieldAlt} />
+              </FeatureIcon>
+              <FeatureTitle>Enterprise Security</FeatureTitle>
+              <FeatureDescription>
+                Implement custom security protocols and data handling procedures for compliance.
               </FeatureDescription>
             </FeatureCard>
           </FeaturesGrid>
         </FeaturesSection>
 
         <HowItWorksSection className="how-it-works">
-          <SectionTitle>How It <span className="highlight">Works</span></SectionTitle>
+          <SectionTitleWrapper>
+            <FontAwesomeIcon icon={faCogs} />
+            <SectionTitle>How It <span className="highlight">Works</span></SectionTitle>
+            <FontAwesomeIcon icon={faCogs} style={{ transform: 'rotate(45deg)' }} />
+          </SectionTitleWrapper>
           <StepsContainer>
             <StepsList>
               <Step className="step-anim">
@@ -610,12 +690,17 @@ const CustomChatbotDevelopment: React.FC = () => {
         </HowItWorksSection>
 
         <BenefitsSection className="benefits-section">
-          <SectionTitle>
-            Why Build a <span className="highlight">Custom Chatbot?</span>
-          </SectionTitle>
+          <SectionTitleWrapper>
+            <FontAwesomeIcon icon={faQuestionCircle} />
+            <SectionTitle>
+              Why Build a <span className="highlight">Custom Chatbot?</span>
+            </SectionTitle>
+          </SectionTitleWrapper>
           <BenefitsGrid>
             <BenefitCard className="benefit-card">
-              <BenefitIcon><i className="fas fa-puzzle-piece" /></BenefitIcon>
+              <BenefitIcon>
+                <FontAwesomeIcon icon={faPuzzlePiece} />
+              </BenefitIcon>
               <BenefitContent>
                 <BenefitTitle>Perfect Fit</BenefitTitle>
                 <BenefitDescription>
@@ -625,7 +710,9 @@ const CustomChatbotDevelopment: React.FC = () => {
             </BenefitCard>
 
             <BenefitCard className="benefit-card">
-              <BenefitIcon><i className="fas fa-drafting-compass" /></BenefitIcon>
+              <BenefitIcon>
+                <FontAwesomeIcon icon={faDraftingCompass} />
+              </BenefitIcon>
               <BenefitContent>
                 <BenefitTitle>Unlimited Flexibility</BenefitTitle>
                 <BenefitDescription>
@@ -635,11 +722,49 @@ const CustomChatbotDevelopment: React.FC = () => {
             </BenefitCard>
 
             <BenefitCard className="benefit-card">
-              <BenefitIcon><i className="fas fa-user-shield" /></BenefitIcon>
+              <BenefitIcon>
+                <FontAwesomeIcon icon={faUserShield} />
+              </BenefitIcon>
               <BenefitContent>
                 <BenefitTitle>Data Ownership</BenefitTitle>
                 <BenefitDescription>
                   Maintain control of your customer data and how it's used or integrated.
+                </BenefitDescription>
+              </BenefitContent>
+            </BenefitCard>
+
+            <BenefitCard className="benefit-card">
+              <BenefitIcon>
+                <FontAwesomeIcon icon={faTachometerAlt} />
+              </BenefitIcon>
+              <BenefitContent>
+                <BenefitTitle>Enhanced Performance</BenefitTitle>
+                <BenefitDescription>
+                  Custom-built solutions can be optimized for speed, accuracy, and specific use cases.
+                </BenefitDescription>
+              </BenefitContent>
+            </BenefitCard>
+
+            <BenefitCard className="benefit-card">
+              <BenefitIcon>
+                <FontAwesomeIcon icon={faThumbsUp} />
+              </BenefitIcon>
+              <BenefitContent>
+                <BenefitTitle>Higher User Satisfaction</BenefitTitle>
+                <BenefitDescription>
+                  Tailored experiences lead to better customer interactions and improved outcomes.
+                </BenefitDescription>
+              </BenefitContent>
+            </BenefitCard>
+
+            <BenefitCard className="benefit-card">
+              <BenefitIcon>
+                <FontAwesomeIcon icon={faRocket} />
+              </BenefitIcon>
+              <BenefitContent>
+                <BenefitTitle>Competitive Edge</BenefitTitle>
+                <BenefitDescription>
+                  Stand out from competitors with unique AI capabilities specific to your industry.
                 </BenefitDescription>
               </BenefitContent>
             </BenefitCard>
@@ -648,7 +773,7 @@ const CustomChatbotDevelopment: React.FC = () => {
 
         <CTASection className="cta-section">
           <CTAContent>
-            <CTATitle className="cta-anim">Let’s Build Something Custom</CTATitle>
+            <CTATitle className="cta-anim">Let's Build Something Custom</CTATitle>
             <CTADescription className="cta-anim">
               Get a chatbot tailored exactly to your business. Start with a free discovery session today.
             </CTADescription>

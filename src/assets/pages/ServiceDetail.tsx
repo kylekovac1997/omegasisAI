@@ -11,6 +11,7 @@ import SMSEmailAutomation from '../components/services/SMSEmailAutomation';
 import EcommerceIntegration from '../components/services/EcommerceAssistant';
 import MultilingualChatbots from '../components/services/MultilingualChatbots';
 import CustomDevelopment from '../components/services/CustomDevelopment';
+import SocialMediaAutomation from '../components/services/SocialMediaAutomation';
 // import SocialMediaAutomation from '@/components/services/SocialMediaAutomation';
 
 interface ServiceDetailParams {
@@ -65,8 +66,7 @@ const ServiceDetail: React.FC = () => {
         return <CustomDevelopment />;
         return <div>Custom Development - Coming Soon</div>;
       case SERVICE_IDS.SOCIAL_MEDIA:
-        // return <SocialMediaAutomation />;
-        return <div>Social Media Automation - Coming Soon</div>;
+        return <SocialMediaAutomation />;
       default:
         return null;
     }
