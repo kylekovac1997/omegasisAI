@@ -940,13 +940,13 @@ const RobotGrid: FC = () => {
                   {robot.description}
                 </RobotDescription>
               </div>
-              <ActionButton
+              {/* <ActionButton
                 colorStart={robot.color}
                 colorEnd={robot.darkColor}
                 glowColor={`${robot.color}80`}
               >
                 Learn More
-              </ActionButton>
+              </ActionButton>/ */}
             </RobotInfoContainer>
           </RobotCard>
         );
@@ -1040,7 +1040,7 @@ const AdvantageCard = styled.div`
   position: relative;
   border: 1px solid rgba(0, 255, 255, 0.1);
   overflow: hidden;
-  opacity: 0;
+  opacity: 1;
   transform: translateY(50px);
   
   &::before {
@@ -1333,11 +1333,11 @@ const Services: FC = () => {
         trigger: '.advantages-grid',
         start: 'top 80%',
       },
-      opacity: 0,
-      y: 50,
-      duration: 0.8,
-      stagger: 0.1,
-      ease: 'power3.out',
+      // opacity: 0,
+      // y: 50,
+      // duration: 0.8,
+      // stagger: 0.1,
+      // ease: 'power3.out',
     });
     
     // CTA section animation
@@ -1346,11 +1346,11 @@ const Services: FC = () => {
         trigger: '.cta-section',
         start: 'top 80%',
       },
-      y: 30,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.2,
-      ease: 'power3.out',
+      // y: 30,
+      // opacity: 0,
+      // duration: 0.8,
+      // stagger: 0.2,
+      // ease: 'power3.out',
     });
     
     return () => {
