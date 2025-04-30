@@ -1040,7 +1040,7 @@ const AdvantageCard = styled.div`
   position: relative;
   border: 1px solid rgba(0, 255, 255, 0.1);
   overflow: hidden;
-  opacity: 0;
+  opacity: 1;
   transform: translateY(50px);
   
   &::before {
@@ -1051,7 +1051,7 @@ const AdvantageCard = styled.div`
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, transparent, rgba(0, 255, 255, 0.05), transparent);
-    opacity: 0;
+    opacity: 1;
     transition: opacity 0.3s ease;
   }
   
@@ -1333,7 +1333,7 @@ const Services: FC = () => {
         trigger: '.advantages-grid',
         start: 'top 80%',
       },
-      opacity: 0,
+      opacity: 1,
       y: 50,
       duration: 0.8,
       stagger: 0.1,

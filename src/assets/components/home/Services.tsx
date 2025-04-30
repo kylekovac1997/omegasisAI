@@ -172,11 +172,7 @@ const ServiceTop = styled.div<{ color: string }>`
     opacity: 0.7;
   }
 `;
-const handleIslandClick = (index: number): void => {
-  setActiveIndex(index);
-  // Navigate to the specific service detail page
-  window.location.href = `/services/${serviceIslands[index].id}`;
-};
+
 
 const ServiceIcon = styled.div`
   width: 70px;
