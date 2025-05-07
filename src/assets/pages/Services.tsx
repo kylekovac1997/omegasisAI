@@ -391,6 +391,10 @@ const CircuitPattern = styled.div`
   transition: opacity 0.5s ease;
   pointer-events: none;
   z-index: 1;
+  &.active {
+    opacity: 0.3;
+    animation: circuitPulse 4s infinite; /* Explicitly set animation */
+  }
 `;
 
 const RobotHeadContainer = styled.div<RobotHeadContainerProps>`
@@ -875,7 +879,7 @@ const renderOrbitingElements = (robotData: ServiceRobot, color: string): JSX.Ele
 const RobotGrid: FC = () => {
   const gridRef = useRef<HTMLDivElement>(null);
   const robotsRef = useRef<Array<HTMLDivElement | null>>([]);
-  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [activeIndex, setActiveIndex] = useState<number|null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -903,7 +907,7 @@ const RobotGrid: FC = () => {
   return (
     <RobotGridContainer ref={gridRef}>
       {serviceRobots.map((robot, index) => {
-        const isActive = index === activeIndex;
+        const isActive = activeIndex !== null && index === activeIndex;
         return (
           <RobotCard
             key={robot.id}
@@ -913,7 +917,7 @@ const RobotGrid: FC = () => {
             borderColor={robot.color}
             glowColor={`${robot.color}80`}
           >
-            <CircuitPattern className="circuit-pattern" />
+           <CircuitPattern className={`circuit-pattern ${isActive ? 'active' : ''}`} />
             <RobotHeadContainer 
               colorStart={robot.darkColor} 
               colorEnd="#0a0a15"

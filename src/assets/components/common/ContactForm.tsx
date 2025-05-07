@@ -1,8 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-// import { gsap } from 'gsap';
 import { theme } from '../../styles/theme';
 import Button from './Button';
 import { animations } from '../../utils/animations';
@@ -64,7 +61,7 @@ const FormLabel = styled.label`
   color: ${theme.colors.dark};
 `;
 
-const FormInput = styled(Field)`
+const FormInput = styled.input`
   width: 100%;
   padding: ${theme.spacing.md};
   border: 1px solid ${theme.colors.lightGray};
@@ -82,9 +79,13 @@ const FormInput = styled(Field)`
     color: ${theme.colors.gray};
     opacity: 0.7;
   }
+  
+  &.error {
+    border-color: ${theme.colors.error};
+  }
 `;
 
-const FormSelect = styled(Field)`
+const FormSelect = styled.select`
   width: 100%;
   padding: ${theme.spacing.md};
   border: 1px solid ${theme.colors.lightGray};
@@ -102,9 +103,13 @@ const FormSelect = styled(Field)`
     border-color: ${theme.colors.primary};
     box-shadow: 0 0 0 3px rgba(1, 71, 255, 0.1);
   }
+  
+  &.error {
+    border-color: ${theme.colors.error};
+  }
 `;
 
-const FormTextarea = styled(Field)`
+const FormTextarea = styled.textarea`
   width: 100%;
   padding: ${theme.spacing.md};
   border: 1px solid ${theme.colors.lightGray};
@@ -123,6 +128,10 @@ const FormTextarea = styled(Field)`
   &::placeholder {
     color: ${theme.colors.gray};
     opacity: 0.7;
+  }
+  
+  &.error {
+    border-color: ${theme.colors.error};
   }
 `;
 
@@ -167,29 +176,6 @@ const FormRow = styled.div`
   }
 `;
 
-// Validation schema
-const ContactSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(2, 'Name is too short')
-    .max(50, 'Name is too long')
-    .required('Name is required'),
-  email: Yup.string()
-    .email('Invalid email address')
-    .required('Email is required'),
-  company: Yup.string()
-    .min(2, 'Company name is too short')
-    .max(50, 'Company name is too long'),
-  phone: Yup.string()
-    .matches(/^[0-9+\-\s()]*$/, 'Invalid phone number')
-    .min(7, 'Phone number is too short'),
-  service: Yup.string()
-    .required('Please select a service'),
-  message: Yup.string()
-    .min(10, 'Message is too short')
-    .max(1000, 'Message is too long')
-    .required('Message is required'),
-});
-
 interface ContactFormProps {
   className?: string;
 }
@@ -197,7 +183,18 @@ interface ContactFormProps {
 const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const formRef = useRef<HTMLDivElement>(null);
+  
+  // Form state
+  const [formValues, setFormValues] = useState<FormValues>({
+    name: '',
+    email: '',
+    company: '',
+    phone: '',
+    service: '',
+    message: '',
+  });
   
   // Animation when component mounts
   useEffect(() => {
@@ -206,61 +203,130 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
     }
   }, []);
   
-  // Initial form values
-  const initialValues: FormValues = {
-    name: '',
-    email: '',
-    company: '',
-    phone: '',
-    service: '',
-    message: '',
+  // Handle input changes
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    
+    // Clear the error for this field when user starts typing
+    if (formErrors[name]) {
+      setFormErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors[name];
+        return newErrors;
+      });
+    }
+    
+    setFormValues(prev => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+  
+  // Form validation
+  const validateForm = (): boolean => {
+    const errors: Record<string, string> = {};
+    
+    // Validate name
+    if (!formValues.name || formValues.name.trim().length < 2) {
+      errors.name = 'Name is required and must be at least 2 characters';
+    }
+    
+    // Validate email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formValues.email || !emailRegex.test(formValues.email)) {
+      errors.email = 'A valid email is required';
+    }
+    
+    // Validate company (optional)
+    if (formValues.company && formValues.company.trim().length < 2) {
+      errors.company = 'Company name must be at least 2 characters';
+    }
+    
+    // Validate phone (optional)
+    if (formValues.phone) {
+      const phoneRegex = /^[0-9+\-\s()]*$/;
+      if (!phoneRegex.test(formValues.phone) || formValues.phone.trim().length < 7) {
+        errors.phone = 'Please enter a valid phone number';
+      }
+    }
+    
+    // Validate service
+    if (!formValues.service) {
+      errors.service = 'Please select a service';
+    }
+    
+    // Validate message
+    if (!formValues.message || formValues.message.trim().length < 10) {
+      errors.message = 'Message is required and must be at least 10 characters';
+    }
+    
+    // Set errors and return validation result
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
   };
   
   // Form submission handler
-  const handleSubmit = async (values: FormValues, { resetForm }: { resetForm: () => void }) => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Validate form
+    if (!validateForm()) {
+      console.log('Form validation failed:', formErrors);
+      return;
+    }
+    
     // Set form status to submitting
     setFormStatus('submitting');
+    console.log('Submitting form with values:', formValues);
     
     try {
-      // In a real implementation, you would send the data to Airtable here
-      // Example with fetch:
+      // Send data to Airtable
+      const response = await fetch('https://api.airtable.com/v0/appp6d2N3R6a8fyGr/Table%201', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer patA0ixgQWRkliSZP.acce0942c11e1bb08ef486734d7f476392bf00cb90cfee76f49ef5139200bb26` // Replace with your actual API key
+        },
+        body: JSON.stringify({
+          fields: {
+            Name: formValues.name,
+            Email: formValues.email,
+            Company: formValues.company || '',
+            Phone: formValues.phone || '',
+            Select: formValues.service, // Note: This matches the Airtable field name
+            Message: formValues.message,
+            Date: new Date().toISOString().split('T')[0] // Format as YYYY-MM-DD
+          }
+        })
+      });
       
-      // const response = await fetch('YOUR_AIRTABLE_API_ENDPOINT', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     'Authorization': `Bearer YOUR_AIRTABLE_API_KEY`
-      //   },
-      //   body: JSON.stringify({
-      //     fields: {
-      //       Name: values.name,
-      //       Email: values.email,
-      //       Company: values.company,
-      //       Phone: values.phone,
-      //       Service: values.service,
-      //       Message: values.message,
-      //       Date: new Date().toISOString()
-      //     }
-      //   })
-      // });
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Airtable error response:', errorData);
+        throw new Error(errorData.error?.message || 'Failed to submit form');
+      }
       
-      // if (!response.ok) {
-      //   throw new Error('Failed to submit form');
-      // }
-      
-      // Simulate API call (remove in production)
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // Set form status to success
+      // Successfully submitted
+      console.log('Form submitted successfully');
       setFormStatus('success');
-      resetForm();
+      
+      // Reset form
+      setFormValues({
+        name: '',
+        email: '',
+        company: '',
+        phone: '',
+        service: '',
+        message: '',
+      });
       
       // Reset form status after 5 seconds
       setTimeout(() => {
         setFormStatus('idle');
       }, 5000);
     } catch (error) {
-      // Set form status to error
+      // Error handling
+      console.error('Form submission error:', error);
       setFormStatus('error');
       setErrorMessage(error instanceof Error ? error.message : 'An unknown error occurred');
       
@@ -291,108 +357,122 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
         </FormError2>
       )}
       
-      <Formik
-        initialValues={initialValues}
-        validationSchema={ContactSchema}
-        onSubmit={handleSubmit}
-      >
-        {({ isSubmitting, errors, touched }) => (
-          <Form>
-            <FormRow>
-              <FormGroup>
-                <FormLabel htmlFor="name">Full Name *</FormLabel>
-                <FormInput
-                  type="text"
-                  id="name"
-                  name="name"
-                  placeholder="John Doe"
-                  className={errors.name && touched.name ? 'error' : ''}
-                />
-                <ErrorMessage name="name" component={FormError} />
-              </FormGroup>
-              
-              <FormGroup>
-                <FormLabel htmlFor="email">Email Address *</FormLabel>
-                <FormInput
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="john.doe@example.com"
-                  className={errors.email && touched.email ? 'error' : ''}
-                />
-                <ErrorMessage name="email" component={FormError} />
-              </FormGroup>
-            </FormRow>
-            
-            <FormRow>
-              <FormGroup>
-                <FormLabel htmlFor="company">Company Name</FormLabel>
-                <FormInput
-                  type="text"
-                  id="company"
-                  name="company"
-                  placeholder="Your Company"
-                  className={errors.company && touched.company ? 'error' : ''}
-                />
-                <ErrorMessage name="company" component={FormError} />
-              </FormGroup>
-              
-              <FormGroup>
-                <FormLabel htmlFor="phone">Phone Number</FormLabel>
-                <FormInput
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  placeholder="+1 (123) 456-7890"
-                  className={errors.phone && touched.phone ? 'error' : ''}
-                />
-                <ErrorMessage name="phone" component={FormError} />
-              </FormGroup>
-            </FormRow>
-            
-            <FormGroup>
-              <FormLabel htmlFor="service">Service of Interest *</FormLabel>
-              <FormSelect
-                as="select"
-                id="service"
-                name="service"
-                className={errors.service && touched.service ? 'error' : ''}
-              >
-                <option value="" disabled>Select a service</option>
-                <option value="sms-email">AI-Powered SMS & Email Automation</option>
-                <option value="lead-qualification">AI Lead Qualification & CRM Integration</option>
-                <option value="ecommerce">AI Virtual Assistant for E-Commerce</option>
-                <option value="multilingual">Multilingual AI Chatbots</option>
-                <option value="custom">Custom AI Chatbot Development</option>
-                <option value="social-media">Social Media Automation & AI Chatbots</option>
-                <option value="other">Other / Not Sure</option>
-              </FormSelect>
-              <ErrorMessage name="service" component={FormError} />
-            </FormGroup>
-            
-            <FormGroup>
-              <FormLabel htmlFor="message">Your Message *</FormLabel>
-              <FormTextarea
-                as="textarea"
-                id="message"
-                name="message"
-                placeholder="Tell us about your project or ask us a question..."
-                className={errors.message && touched.message ? 'error' : ''}
-              />
-              <ErrorMessage name="message" component={FormError} />
-            </FormGroup>
-            
-            <SubmitButton
-              type="submit"
-              variant="gradient"
-              size="lg"
-              disabled={isSubmitting || formStatus === 'submitting'}
-            >
-              {formStatus === 'submitting' ? 'Sending...' : 'Send Message'}
-            </SubmitButton>
-          </Form>
-        )}
-      </Formik>
+      <form onSubmit={handleSubmit}>
+        <FormRow>
+          <FormGroup>
+            <FormLabel htmlFor="name">Full Name *</FormLabel>
+            <FormInput
+              type="text"
+              id="name"
+              name="name"
+              placeholder="John Doe"
+              value={formValues.name}
+              onChange={handleChange}
+              className={formErrors.name ? 'error' : ''}
+            />
+            {formErrors.name && <FormError>{formErrors.name}</FormError>}
+          </FormGroup>
+          
+          <FormGroup>
+            <FormLabel htmlFor="email">Email Address *</FormLabel>
+            <FormInput
+              type="email"
+              id="email"
+              name="email"
+              placeholder="john.doe@example.com"
+              value={formValues.email}
+              onChange={handleChange}
+              className={formErrors.email ? 'error' : ''}
+            />
+            {formErrors.email && <FormError>{formErrors.email}</FormError>}
+          </FormGroup>
+        </FormRow>
+        
+        <FormRow>
+          <FormGroup>
+            <FormLabel htmlFor="company">Company Name</FormLabel>
+            <FormInput
+              type="text"
+              id="company"
+              name="company"
+              placeholder="Your Company"
+              value={formValues.company}
+              onChange={handleChange}
+              className={formErrors.company ? 'error' : ''}
+            />
+            {formErrors.company && <FormError>{formErrors.company}</FormError>}
+          </FormGroup>
+          
+          <FormGroup>
+            <FormLabel htmlFor="phone">Phone Number</FormLabel>
+            <FormInput
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="+1 (123) 456-7890"
+              value={formValues.phone}
+              onChange={handleChange}
+              className={formErrors.phone ? 'error' : ''}
+            />
+            {formErrors.phone && <FormError>{formErrors.phone}</FormError>}
+          </FormGroup>
+        </FormRow>
+        
+        <FormGroup>
+          <FormLabel htmlFor="service">Service of Interest *</FormLabel>
+          <FormSelect
+            id="service"
+            name="service"
+            value={formValues.service}
+            onChange={handleChange}
+            className={formErrors.service ? 'error' : ''}
+          >
+            <option value="">Select a service</option>
+            <option value="AI-Powered SMS & Email Automation">AI-Powered SMS & Email Automation</option>
+            <option value="AI Lead Qualification & CRM Integration">AI Lead Qualification & CRM Integration</option>
+            <option value="AI Virtual Assistant for E-Commercet">AI Virtual Assistant for E-Commerce</option>
+            <option value="Multilingual AI Chatbots">Multilingual AI Chatbots</option>
+            <option value="Custom AI Chatbot Development">Custom AI Chatbot Development</option>
+            <option value="Social Media Automation & AI Chatbots">Social Media Automation & AI Chatbots</option>
+            <option value="Other">Other / Not Sure</option>
+          </FormSelect>
+          {formErrors.service && <FormError>{formErrors.service}</FormError>}
+        </FormGroup>
+        
+        <FormGroup>
+          <FormLabel htmlFor="message">Your Message *</FormLabel>
+          <FormTextarea
+            id="message"
+            name="message"
+            placeholder="Tell us about your project or ask us a question..."
+            value={formValues.message}
+            onChange={handleChange}
+            className={formErrors.message ? 'error' : ''}
+          />
+          {formErrors.message && <FormError>{formErrors.message}</FormError>}
+        </FormGroup>
+        
+        <SubmitButton
+          type="submit"
+          variant="gradient"
+          size="lg"
+          disabled={formStatus === 'submitting'}
+        >
+          {formStatus === 'submitting' ? 'Sending...' : 'Send Message'}
+        </SubmitButton>
+      </form>
+      
+      {/* Debug info */}
+      <div style={{ marginTop: '20px', padding: '10px', background: '#f9f9f9', borderRadius: '4px', display: 'none' }}>
+        <details>
+          <summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>Debug Form State</summary>
+          <pre style={{ whiteSpace: 'pre-wrap' }}>
+            <strong>Values:</strong> {JSON.stringify(formValues, null, 2)}
+            <br />
+            <strong>Errors:</strong> {JSON.stringify(formErrors, null, 2)}
+          </pre>
+        </details>
+      </div>
     </FormContainer>
   );
 };

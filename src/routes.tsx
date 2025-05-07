@@ -7,6 +7,9 @@ import About from './assets/pages/About';
 import Services from './assets/pages/Services';
 import ServiceDetail from './assets/pages/ServiceDetail';
 import Contact from './assets/pages/Contact';
+import PrivacyPolicy from './assets/components/footer/PrivacyPolicy';
+import TermsofService from './assets/components/footer/TermsOfService';
+import CookiePolicy from './assets/components/footer/CookiePolicy';
 
 // Error page
 const ErrorPage = () => (
@@ -56,6 +59,30 @@ const router = createHashRouter([
     element: (
       <Layout>
         <Contact />
+      </Layout>
+    ),
+  },
+  {
+    path: '/privacy',
+    element: (
+      <Layout>
+        <PrivacyPolicy/>
+      </Layout>
+    ),
+  },
+  {
+    path: '/terms',
+    element: (
+      <Layout>
+        <TermsofService/>
+      </Layout>
+    ),
+  },
+  {
+    path: '/cookies',
+    element: (
+      <Layout>
+        <CookiePolicy/>
       </Layout>
     ),
   },
